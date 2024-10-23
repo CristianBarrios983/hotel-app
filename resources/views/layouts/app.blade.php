@@ -1,36 +1,22 @@
+<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    @include('layouts.includes.head')  <!-- Incluye el archivo head -->
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    @livewireStyles <!-- Estilos de Livewire -->
+</head>
+<body>
+    @include('layouts.includes.navbar')  <!-- Incluye el archivo navbar -->
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <div class="container">
+        @yield('content')  <!-- El contenido dinámico de cada vista -->
+    </div>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <livewire:layout.navigation />
+    @stack('modals')  <!-- Para modales de Livewire -->
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    @include('layouts.includes.footer')  <!-- Incluye el archivo footer -->
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+    @livewireScripts  <!-- Scripts de Livewire -->
+</body>
 </html>
