@@ -17,7 +17,7 @@
             Habitaciones
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="/habitaciones">Habitaciones</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Pisos</a></li>
             <li><hr class="dropdown-divider"></li>
