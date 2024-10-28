@@ -33,7 +33,7 @@
                                 <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $tipo->id }})">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="delete({{ $tipo->id }})">
+                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar({{ $tipo->id }})">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>

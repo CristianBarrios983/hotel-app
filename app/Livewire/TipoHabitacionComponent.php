@@ -97,11 +97,11 @@ class TipoHabitacionComponent extends Component
     }
 
     // Eliminar tipo de habitación
-    // public function eliminar($id)
-    // {
-    //     TipoHabitacion::find($id)->delete();
-    //     session()->flash('message', 'Tipo de habitación eliminada con éxito.');
-    // }
+    public function eliminar($id)
+    {
+        TipoHabitacion::find($id)->delete();
+        session()->flash('message', 'Tipo de habitación eliminada con éxito.');
+    }
 }
 
 ?>
