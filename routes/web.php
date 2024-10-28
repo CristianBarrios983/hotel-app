@@ -16,4 +16,9 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+
+Route::get('/tipo_habitaciones', function () {
+    return view('tipo_habitaciones'); 
+})->name('usuarios')->middleware(['auth']);
+
 require __DIR__.'/auth.php';

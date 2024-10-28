@@ -21,7 +21,7 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Pisos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Tipos</a></li>
+            <li><a class="dropdown-item" href="/tipo_habitaciones">Tipos</a></li>
           </ul>
         </li>
         <li class="nav-item">
