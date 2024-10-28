@@ -10,14 +10,17 @@
                             <th scope="col">#</th>
                             <th scope="col">Nombre tipo</th>
                             <th scope="col">Descripcion</th>
+                            <th scope="col">Fecha de creacion</th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($tipos as $tipo)
                         <tr>
-                            <th scope="row"></th>
-                            <td></td>
-                            <td></td>
+                            <th scope="row">{{ $tipo->id }}</th>
+                            <td>{{ $tipo->nombre_tipo }}</td>
+                            <td>{{ $tipo->descripcion }}</td>
+                            <td>{{ $tipo->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-warning btn-sm" title="Editar">
                                     <i class="bi bi-pencil-fill"></i>
@@ -27,6 +30,7 @@
                                 </a>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
