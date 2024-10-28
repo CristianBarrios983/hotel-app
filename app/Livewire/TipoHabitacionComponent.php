@@ -32,27 +32,27 @@ class TipoHabitacionComponent extends Component
     }
 
     // Abrir y cerrar modales de edición
-    // public function abrirModalEditar($id)
-    // {
-    //     $this->resetearCampos();
-    //     $this->tipoId = $id;
-    //     $this->cargarDatosTipo($id);
-    //     $this->isEditModalOpen = true;
-    // }
+    public function abrirModalEditar($id)
+    {
+        $this->resetearCampos();
+        $this->tipoId = $id;
+        $this->cargarDatosTipo($id);
+        $this->isEditModalOpen = true;
+    }
 
-    // public function cerrarModalEditar()
-    // {
-    //     $this->resetearCampos();
-    //     $this->isEditModalOpen = false;
-    // }
+    public function cerrarModalEditar()
+    {
+        $this->resetearCampos();
+        $this->isEditModalOpen = false;
+    }
 
     // Cargar los datos del tipo de habitación para editar
-    // private function cargarDatosTipo($id)
-    // {
-    //     $tipo = TipoHabitacion::findOrFail($id);
-    //     $this->nombreTipo = $tipo->nombre_tipo;
-    //     $this->descripcion = $tipo->descripcion;
-    // }
+    private function cargarDatosTipo($id)
+    {
+        $tipo = TipoHabitacion::findOrFail($id);
+        $this->nombreTipo = $tipo->nombre_tipo;
+        $this->descripcion = $tipo->descripcion;
+    }
 
     // Reseteo de campos
     private function resetearCampos()
@@ -80,21 +80,21 @@ class TipoHabitacionComponent extends Component
     }
 
     // Actualizar tipo de habitación existente
-    // public function actualizar()
-    // {
-    //     $this->validate([
-    //         'nombreTipo' => 'required|string|max:255',
-    //         'descripcion' => 'nullable|string',
-    //     ]);
+    public function actualizar()
+    {
+        $this->validate([
+            'nombreTipo' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+        ]);
 
-    //     TipoHabitacion::find($this->tipoId)->update([
-    //         'nombre_tipo' => $this->nombreTipo,
-    //         'descripcion' => $this->descripcion,
-    //     ]);
+        TipoHabitacion::find($this->tipoId)->update([
+            'nombre_tipo' => $this->nombreTipo,
+            'descripcion' => $this->descripcion,
+        ]);
 
-    //     session()->flash('message', 'Tipo de habitación actualizado con éxito.');
-    //     $this->cerrarModalEditar();
-    // }
+        session()->flash('message', 'Tipo de habitación actualizado con éxito.');
+        $this->cerrarModalEditar();
+    }
 
     // Eliminar tipo de habitación
     // public function eliminar($id)
