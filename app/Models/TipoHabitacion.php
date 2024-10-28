@@ -10,4 +10,6 @@ class TipoHabitacion extends Model
     use HasFactory;
 
     protected $table = 'tipos_habitacion'; // Especifica el nombre correcto de la tabla
+
+    protected $fillable = ['nombre_tipo', 'descripcion'];
 }
