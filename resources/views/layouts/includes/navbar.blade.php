@@ -19,7 +19,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Habitaciones</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Pisos</a></li>
+            <li><a class="dropdown-item" href="/pisos">Pisos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Tipos</a></li>
           </ul>

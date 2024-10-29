@@ -21,5 +21,9 @@ Route::get('/usuarios', function () {
     return view('usuarios'); // Asegúrate de que esto apunte a tu vista
 })->name('usuarios')->middleware(['auth']);
     
+Route::get('/pisos', function () {
+    return view('pisos'); // Asegúrate de que esto apunte a tu vista
+})->name('pisos')->middleware(['auth']);
+    
 
 require __DIR__.'/auth.php';
