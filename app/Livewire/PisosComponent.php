@@ -93,4 +93,11 @@ class PisosComponent extends Component
         session()->flash('message', 'Piso del establecimiento actualizado con éxito.');
         $this->cerrarModalEditar();
     }
+
+    // Eliminar tipo de habitación
+    public function eliminar($id)
+    {
+        Piso::find($id)->delete();
+        session()->flash('message', 'Piso del establecimiento eliminado con éxito.');
+    }
 }
