@@ -25,5 +25,8 @@ Route::get('/pisos', function () {
     return view('pisos'); // Asegúrate de que esto apunte a tu vista
 })->name('pisos')->middleware(['auth']);
     
+Route::get('/tipo_habitaciones', function () {
+    return view('tipo_habitaciones'); 
+})->name('usuarios')->middleware(['auth']);
 
 require __DIR__.'/auth.php';
