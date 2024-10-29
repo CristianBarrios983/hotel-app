@@ -26,7 +26,7 @@
                     @foreach ($pisos as $piso)
                         <tr>
                             <th scope="row">{{ $piso->id }}</th>
-                            <td>{{ $piso->numero }}</td>
+                            <td>{{ $piso->numero_piso }}</td>
                             <td>{{ $piso->descripcion }}</td>
                             <td>{{ $piso->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
@@ -50,7 +50,37 @@
 
 
                 <!-- Modal para Registrar Tipo de Habitación -->
-        
+        @if($isCreateModalOpen)
+            <div class="modal fade show d-block" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Crear Piso de Establecimiento</h5>
+                            <button type="button" class="btn-close" wire:click="cerrarModalCrear" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="numeroPiso" class="form-label">Numero Piso</label>
+                                    <input type="text" class="form-control" wire:model="numeroPiso">
+                                    @error('numeroPiso') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label">Descripción (Opcional)</label>
+                                    <input type="text" class="form-control" wire:model="descripcion">
+                                    @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" wire:click="cerrarModalCrear">Cancelar</button>
+                            <button type="button" class="btn btn-primary" wire:click="almacenar">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-backdrop fade show"></div>
+        @endif
             </div>
         </div>
 
