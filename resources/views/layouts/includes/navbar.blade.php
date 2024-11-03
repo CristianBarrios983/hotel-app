@@ -32,7 +32,7 @@
             Productos
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Productos</a></li>
+            <li><a class="dropdown-item" href="/productos">Productos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Proveedores</a></li>
             <li><hr class="dropdown-divider"></li>

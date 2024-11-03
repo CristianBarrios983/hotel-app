@@ -29,4 +29,8 @@ Route::get('/tipo_habitaciones', function () {
     return view('tipo_habitaciones'); 
 })->name('usuarios')->middleware(['auth']);
 
+Route::get('/productos', function () {
+    return view('productos'); 
+})->name('productos')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
