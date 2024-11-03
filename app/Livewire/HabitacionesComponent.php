@@ -152,5 +152,12 @@ class HabitacionesComponent extends Component
         $this->cerrarModalEditar();
     }
 
+    // Eliminar tipo de habitación
+    public function eliminar($id)
+    {
+        Habitacion::find($id)->delete();
+        session()->flash('message', 'Habitacion eliminado con éxito.');
+    }
+
 
 }
