@@ -26,30 +26,34 @@
                             <th scope="col">Disponibilidad</th>
                             <th scope="col">Tipo de Habitación</th>
                             <th scope="col">Piso</th>
+                            <th scope="col">Fecha de Creacion</th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($habitaciones as $habitacion)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>101</td>
-                            <td>2</td>
-                            <td>25</td>
-                            <td>Mar</td>
-                            <td>King Size</td>
-                            <td>$120</td>
-                            <td class="text-success">Disponible</td>
-                            <td>Suite</td>
-                            <td>1</td>
+                            <th scope="row">{{ $habitacion->id }}</th>
+                            <td>{{ $habitacion->numero_habitacion }}</td>
+                            <td>{{ $habitacion->capacidad }}</td>
+                            <td>{{ $habitacion->tamano }}</td>
+                            <td>{{ $habitacion->vistas }}</td>
+                            <td>{{ $habitacion->tipo_cama }}</td>
+                            <td>${{ $habitacion->precio_por_noche }}</td>
+                            <td class="text-success">{{ $habitacion->disponibilidad }}</td>
+                            <td>{{ $habitacion->tipo_habitacion_id }}</td>
+                            <td>{{ $habitacion->piso_id }}</td>
+                            <td>{{ $habitacion->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-warning btn-sm" title="Editar">
+                                <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $habitacion->id }})">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar">
+                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar({{ $habitacion->id }})">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
                         </tr>
+                    @endforeach
                         <!-- Más filas de muestra -->
                     </tbody>
                 </table>
