@@ -10,7 +10,7 @@
           <a class="nav-link active" aria-current="page" href="#">Panel</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Usuarios</a>
+          <a class="nav-link" href="/usuarios">Usuarios</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -19,9 +19,9 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/habitaciones">Habitaciones</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Pisos</a></li>
+            <li><a class="dropdown-item" href="/pisos">Pisos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Tipos</a></li>
+            <li><a class="dropdown-item" href="/tipo_habitaciones">Tipos</a></li>
           </ul>
         </li>
         <li class="nav-item">

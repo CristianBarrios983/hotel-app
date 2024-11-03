@@ -20,4 +20,16 @@ Route::get('/habitaciones', function () {
     return view('habitaciones'); // Asegúrate de que esto apunte a tu vista
 })->name('habitaciones')->middleware(['auth']);
 
+Route::get('/usuarios', function () {
+    return view('usuarios'); // Asegúrate de que esto apunte a tu vista
+})->name('usuarios')->middleware(['auth']);
+    
+Route::get('/pisos', function () {
+    return view('pisos'); 
+})->name('pisos')->middleware(['auth']);
+    
+Route::get('/tipo_habitaciones', function () {
+    return view('tipo_habitaciones'); 
+})->name('tipo_habitaciones')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
