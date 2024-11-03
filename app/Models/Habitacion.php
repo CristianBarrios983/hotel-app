@@ -11,5 +11,15 @@ class Habitacion extends Model
 
     protected $table = 'habitaciones';
 
-    // protected $fillable = ['numero_piso', 'descripcion'];
+    protected $fillable = [
+        'numero_habitacion',
+        'capacidad',
+        'tamano',
+        'vistas',
+        'tipo_cama',
+        'precio_por_noche',
+        'disponibilidad',
+        'tipo_habitacion_id',
+        'piso_id',
+    ];
 }
