@@ -24,21 +24,20 @@
                             <th scope="col">Stock minimo</th>
                             <th scope="col">Categoria</th>
                             <th scope="col">Fecha de creacion</th>
-                            <th scope="col">Fecha de modificacion</th>
                             <th scope="col" class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($productos as $producto)
                         <tr>
-                        <th scope="row">1</th>
-                        <td>Papel Higiénico</td>
-                        <td>Rollo de papel higiénico de doble hoja.</td>
-                        <td>$1.50</td>
-                        <td>65</td>
-                        <td>40</td>
-                        <td>Productos de Higiene</td>
-                        <td>18-01-2020</td>
-                        <td>20-10-2024</td>
+                            <th scope="row">{{ $producto->id }}</th>
+                            <td>{{ $producto->nombre }}</td>
+                            <td>{{ $producto->descripcion }}</td>
+                            <td>${{ $producto->precio }}</td>
+                            <td>{{ $producto->stock }}</td>
+                            <td>{{ $producto->stock_minimo }}</td>
+                            <td>{{ $producto->categoria_id }}</td>
+                            <td>{{ $producto->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-warning btn-sm" title="Editar">
                                     <i class="bi bi-pencil-fill"></i>
@@ -48,6 +47,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
