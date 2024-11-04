@@ -94,4 +94,12 @@ class CategoriasComponent extends Component
         session()->flash('message', 'Categoria actualizada con éxito.');
         $this->cerrarModalEditar();
     }
+
+
+    // Eliminar categoria
+    public function eliminar($id)
+    {
+        Categorias::find($id)->delete();
+        session()->flash('message', 'Categoria eliminada con éxito.');
+    }
 }
