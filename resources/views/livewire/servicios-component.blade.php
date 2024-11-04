@@ -12,25 +12,29 @@
                             <th scope="col">Descripcion</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Disponibilidad</th>
+                            <th scope="col">Fecha de creacion</th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($servicios as $servicio)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Spa</td>
-                            <td>RES1002</td>
-                            <td>Masaje de relajación</td>
-                            <td>1</td>
+                            <th scope="row">{{ $servicio->id }}</th>
+                            <td>{{ $servicio->nombre }}</td>
+                            <td>{{ $servicio->descripcion }}</td>
+                            <td>{{ $servicio->precio }}</td>
+                            <td>{{ $servicio->disponibilidad }}</td>
+                            <td>{{ $servicio->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-warning btn-sm" title="Editar">
+                                <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $servicio->id }})">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar">
+                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar({{ $servicio->id }})">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
