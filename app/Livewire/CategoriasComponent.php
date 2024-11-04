@@ -54,4 +54,44 @@ class CategoriasComponent extends Component
         session()->flash('message', 'Categoria creada con éxito.');
         $this->cerrarModalCrear();
     }
+
+    // Abrir y cerrar modales de edición
+    public function abrirModalEditar($id)
+    {
+        $this->resetearCampos();
+        $this->categoriaId = $id;
+        $this->cargarDatosCategoria($id);
+        $this->isEditModalOpen = true;
+    }
+
+    public function cerrarModalEditar()
+    {
+        $this->resetearCampos();
+        $this->isEditModalOpen = false;
+    }
+
+    // Cargar los datos de la categoria para editar
+    private function cargarDatosCategoria($id)
+    {
+        $categoria = Categorias::findOrFail($id);
+        $this->nombreCategoria = $categoria->nombre_categoria;
+        $this->descripcion = $categoria->descripcion;
+    }
+
+    // Actualizar categoria existente
+    public function actualizar()
+    {
+        $this->validate([
+            'nombreCategoria' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+        ]);
+
+        Categorias::find($this->categoriaId)->update([
+            'nombre_categoria' => $this->nombreCategoria,
+            'descripcion' => $this->descripcion,
+        ]);
+
+        session()->flash('message', 'Categoria actualizada con éxito.');
+        $this->cerrarModalEditar();
+    }
 }
