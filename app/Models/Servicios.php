@@ -11,5 +11,5 @@ class Servicios extends Model
 
     protected $table = 'servicios';
 
-    protected $fillable = ['', ''];
+    protected $fillable = ['nombre', 'descripcion', 'precio', 'disponibilidad'];
 }
