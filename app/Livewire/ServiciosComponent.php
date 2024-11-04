@@ -58,4 +58,55 @@ class ServiciosComponent extends Component
         session()->flash('message', 'Servicio creado con éxito.');
         $this->cerrarModalCrear();
     }
+
+    // Abrir y cerrar modales de edición
+    public function abrirModalEditar($id)
+    {
+        $this->resetearCampos();
+        $this->servicioId = $id;
+        $this->cargarDatosServicio($id);
+        $this->isEditModalOpen = true;
+    }
+
+    public function cerrarModalEditar()
+    {
+        $this->resetearCampos();
+        $this->isEditModalOpen = false;
+    }
+
+    // Cargar los datos del servicio para editar
+    private function cargarDatosServicio($id)
+    {
+        $servicio = Servicios::findOrFail($id);
+        $this->nombre = $servicio->nombre;
+        $this->descripcion = $servicio->descripcion;
+        $this->precio = $servicio->precio;
+        $this->disponibilidad = $servicio->disponibilidad;
+    }
+
+    public function actualizar()
+    {
+        // Validación
+        $this->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string|max:255',
+            'precio' => 'required|numeric|min:0',      
+            'disponibilidad' => 'required|boolean',     
+        ]); 
+
+        // Actualizar el registro del servicio en la base de datos
+        $servicio = Servicios::find($this->servicioId);
+        $servicio->update([
+            'nombre' => $this->nombre,
+            'descripcion' => $this->descripcion,
+            'precio' => $this->precio,
+            'disponibilidad' => $this->disponibilidad,
+        ]);
+
+        // Mostrar mensaje de éxito
+        session()->flash('message', 'Servicio actualizado con éxito.');
+
+        // Cerrar el modal y resetear los campos
+        $this->cerrarModalEditar();
+    }
 }
