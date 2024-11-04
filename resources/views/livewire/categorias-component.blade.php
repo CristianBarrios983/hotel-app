@@ -81,20 +81,20 @@
 
 
                 <!-- Modal para Registrar Categorias -->
-                <!-- @if($isCreateModalOpen)
+                @if($isCreateModalOpen)
                     <div class="modal fade show d-block" tabindex="-1">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Crear Piso del Establecimiento</h5>
+                                    <h5 class="modal-title">Crear Categoria</h5>
                                     <button type="button" class="btn-close" wire:click="cerrarModalCrear" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="numeroPiso" class="form-label">Numero Piso</label>
-                                            <input type="text" class="form-control" wire:model="numeroPiso">
-                                            @error('numeroPiso') <span class="text-danger">{{ $message }}</span> @enderror
+                                            <label for="nombreCategoria" class="form-label">Nombre Categoria</label>
+                                            <input type="text" class="form-control" wire:model="nombreCategoria">
+                                            @error('nombreCategoria') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label for="descripcion" class="form-label">Descripción (Opcional)</label>
@@ -111,6 +111,6 @@
                         </div>
                     </div>
                     <div class="modal-backdrop fade show"></div>
-                @endif -->
+                @endif
             </div>
         </div>
