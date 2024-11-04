@@ -40,4 +40,8 @@ Route::get('/categorias', function () {
     return view('categorias'); 
 })->name('categorias')->middleware(['auth']);
 
+Route::get('/servicios', function () {
+    return view('servicios'); 
+})->name('servicios')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
