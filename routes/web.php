@@ -36,4 +36,8 @@ Route::get('/huespedes', function () {
     return view('huespedes'); 
 })->name('huespedes')->middleware(['auth']);
 
+Route::get('/categorias', function () {
+    return view('categorias'); 
+})->name('categorias')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
