@@ -109,4 +109,11 @@ class ServiciosComponent extends Component
         // Cerrar el modal y resetear los campos
         $this->cerrarModalEditar();
     }
+
+    // Eliminar huesped
+    public function eliminar($id)
+    {
+        Servicios::find($id)->delete();
+        session()->flash('message', 'Servicio eliminado con éxito.');
+    }
 }
