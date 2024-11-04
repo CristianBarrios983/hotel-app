@@ -21,15 +21,19 @@ Route::get('/habitaciones', function () {
 })->name('habitaciones')->middleware(['auth']);
 
 Route::get('/usuarios', function () {
-    return view('usuarios'); // Asegúrate de que esto apunte a tu vista
+    return view('usuarios'); 
 })->name('usuarios')->middleware(['auth']);
     
 Route::get('/pisos', function () {
-    return view('pisos'); 
+    return view('pisos');
 })->name('pisos')->middleware(['auth']);
     
 Route::get('/tipo_habitaciones', function () {
     return view('tipo_habitaciones'); 
 })->name('tipo_habitaciones')->middleware(['auth']);
+
+Route::get('/huespedes', function () {
+    return view('huespedes'); 
+})->name('huespedes')->middleware(['auth']);
 
 require __DIR__.'/auth.php';
