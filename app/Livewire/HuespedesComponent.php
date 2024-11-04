@@ -137,4 +137,11 @@ class HuespedesComponent extends Component
         $this->cerrarModalEditar();
     }
 
+    // Eliminar huesped
+    public function eliminar($id)
+    {
+        Huesped::find($id)->delete();
+        session()->flash('message', 'Huesped eliminado con éxito.');
+    }
+
 }
