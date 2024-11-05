@@ -126,4 +126,11 @@ class ProductosComponent extends Component
         session()->flash('message', 'Producto actualizado con éxito.');
         $this->cerrarModalEditar();
     }
+
+    // Eliminar categoria
+    public function eliminar($id)
+    {
+        Productos::find($id)->delete();
+        session()->flash('message', 'Producto eliminado con éxito.');
+    }
 }
