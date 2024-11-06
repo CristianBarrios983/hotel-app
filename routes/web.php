@@ -52,4 +52,8 @@ Route::get('/servicios', function () {
     return view('servicios'); 
 })->name('servicios')->middleware(['auth']);
 
+Route::get('/pedidos', function () {
+    return view('pedidos'); 
+})->name('pedidos')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
