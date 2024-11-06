@@ -36,7 +36,7 @@
           <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/productos">Productos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Proveedores</a></li>
+            <li><a class="dropdown-item" href="/proveedores">Proveedores</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/servicios">Servicios</a></li>
           </ul>
