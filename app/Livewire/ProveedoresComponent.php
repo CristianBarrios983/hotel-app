@@ -78,4 +78,57 @@ class ProveedoresComponent extends Component
         $this->cerrarModalCrear();
     }
 
+    // Abrir y cerrar modales de edición
+    public function abrirModalEditar($id)
+    {
+        $this->resetearCampos();
+        $this->proveedorId = $id;
+        $this->cargarDatosProveedor($id);
+        $this->isEditModalOpen = true;
+    }
+
+    public function cerrarModalEditar()
+    {
+        $this->resetearCampos();
+        $this->isEditModalOpen = false;
+    }
+
+    // Cargar los datos del proveedor para editar
+    private function cargarDatosProveedor($id)
+    {
+        $proveedor = Proveedores::findOrFail($id);
+        $this->nombreProveedor = $proveedor->nombre_proveedor;
+        $this->telefono = $proveedor->telefono;
+        $this->email = $proveedor->email;
+        $this->direccion = $proveedor->direccion;
+        $this->descripcion = $proveedor->descripcion;
+        $this->categoria_id = $proveedor->categoria_id;
+    }
+
+    // Actualizar proveedor existente
+    public function actualizar()
+    {
+        $this->validate([
+            'nombreProveedor' => 'required|string|max:255',
+            'telefono' => 'required|string|max:15',
+            'email' => 'required|email|unique:proveedores,email,' . $this->proveedorId . '|max:255',
+            'direccion' => 'required|string|max:255',
+            'descripcion' => 'nullable|string|max:255',
+            'categoria_id' => 'required|exists:categorias,id',
+        ]);
+                
+
+        Proveedores::find($this->proveedorId)->update([
+            'nombre_proveedor' => $this->nombreProveedor,
+            'telefono' => $this->telefono,
+            'email' => $this->email,
+            'direccion' => $this->direccion,
+            'descripcion' => $this->descripcion,
+            'categoria_id' => $this->categoria_id,
+        ]);
+
+        session()->flash('message', 'Proveedor actualizado con éxito.');
+        $this->cerrarModalEditar();
+    }
+
 }
