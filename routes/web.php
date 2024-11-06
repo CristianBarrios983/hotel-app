@@ -33,4 +33,9 @@ Route::get('/proveedores', function () {
     return view('proveedores'); 
 })->name('proveedores')->middleware(['auth']);
 
+
+Route::get('/categorias', function () {
+    return view('categorias'); 
+})->name('categorias')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
