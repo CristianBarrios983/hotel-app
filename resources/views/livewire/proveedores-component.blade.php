@@ -16,30 +16,30 @@
                             <th scope="col">Descripcion</th>
                             <th scope="col">Categoria</th>
                             <th scope="col">Fecha de creacion</th>
-                            <th scope="col">Fecha de actualizacion</th>
                             <th scope="col" class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($proveedores as $proveedor)
                         <tr>
-                        <th scope="row">1</th>
-                        <td>Servicios Globales S.A.</td>
-                        <td>+54 11 4321-5678</td>
-                        <td>contacto@serviciosglobales.com</td>
-                        <td>Av. Libertador 1000, Buenos Aires</td>
-                        <td>Proveedor de servicios de limpieza y mantenimiento.</td>
-                        <td>Servicios</td>
-                        <td>15-05-2020</td>
-                        <td>20-10-2024</td>
+                        <th scope="row">{{ $proveedor->id }}</th>
+                        <td>{{ $proveedor->nombre_proveedor }}</td>
+                        <td>{{ $proveedor->telefono }}</td>
+                        <td>{{ $proveedor->email }}</td>
+                        <td>{{ $proveedor->direccion }}</td>
+                        <td>{{ $proveedor->descripcion }}</td>
+                        <td>{{ $proveedor->categoria_id }}</td>
+                        <td>{{ $proveedor->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-warning btn-sm" title="Editar">
+                                <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $proveedor->id }})">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar">
+                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar({{ $proveedor->id }})">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
