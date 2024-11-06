@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('proveedores', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_proveedor');
-            $table->string('telefono');
+            $table->string('telefono', 15); // Limite de longitud para teléfono
             $table->string('email')->unique();
-            $table->string('direccion');
-            $table->string('descripcion');
+            $table->string('direccion', 255); // Limite de longitud para dirección
+            $table->string('descripcion')->nullable(); // Opcional si corresponde
             $table->unsignedBigInteger('categoria_id')->nullable();
             $table->timestamps();
 
