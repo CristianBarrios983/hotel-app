@@ -131,4 +131,11 @@ class ProveedoresComponent extends Component
         $this->cerrarModalEditar();
     }
 
+    // Eliminar proveedor
+    public function eliminar($id)
+    {
+        Proveedores::find($id)->delete();
+        session()->flash('message', 'Proveedor eliminado con éxito.');
+    }
+
 }
