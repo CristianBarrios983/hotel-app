@@ -21,11 +21,12 @@
                         <tr>
                             <th scope="row">1</th>
                             <td>12</td>
-                            <td>Proveedor de limpeza SRL</td>
-                            <td>11-08-2024</td>
-                            <td>15-08-2024</td>
-                            <td>Pendiente</td>
-                            <td>$70000</td>
+                            <td>Jabones</td>
+                            <td>Higiene Total</td>
+                            <td>20-10-2024</td>
+                            <td>06-11-2024</td>
+                            <td>Completado</td>
+                            <td>$200</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-warning btn-sm" title="Editar">
                                     <i class="bi bi-pencil-fill"></i>
