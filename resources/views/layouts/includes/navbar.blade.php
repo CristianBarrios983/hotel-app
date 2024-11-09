@@ -41,8 +41,18 @@
             <li><a class="dropdown-item" href="/servicios">Servicios</a></li>
           </ul>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/pedidos">Pedidos</a>
+        </li> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pedidos
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/pedidos">Pedidos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/realizar-pedido">Realizar Pedido</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
