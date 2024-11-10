@@ -67,7 +67,7 @@
                                     <input type="number" class="form-control" min="1" max="50" value="1" style="width: 80px;">
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm" onclick="agregarProducto('Producto A', 10, 1)">
+                                    <button class="btn btn-primary btn-sm">
                                         <i class="bi bi-cart-plus"></i> Añadir
                                     </button>
                                 </td>

@@ -51,7 +51,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/pedidos">Pedidos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/realizar-pedido">Realizar Pedido</a></li>
+            <li><a class="dropdown-item" href="/crear-pedido">Realizar Pedido</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
