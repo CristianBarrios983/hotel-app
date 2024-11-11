@@ -60,4 +60,8 @@ Route::get('/crear-pedido', function () {
     return view('crear-pedido'); 
 })->name('crear-pedido')->middleware(['auth']);
 
+Route::get('/recepcion', function () {
+    return view('recepcion'); 
+})->name('recepcion')->middleware(['auth']);
+
 require __DIR__.'/auth.php';

@@ -59,6 +59,10 @@
             Reservas
           </a>
           <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/recepcion">Recepcion</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Reservas</a></li>
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Check In</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Check Out</a></li>
