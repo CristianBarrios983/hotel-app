@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración - Reserva de Canchas</title>
+    <title>Configuración - Reserva de Hotel</title>
 </head>
 <body>
     <h2>Configuración</h2>
@@ -14,19 +14,27 @@
         <input type="text" id="nombre" name="nombre" required>
         <br><br>
 
-        <label for="correo">Correo Electrónico:</label>
+        <label for="nombre">Razon social</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+
+        <label for="correo">Email</label>
         <input type="email" id="correo" name="correo" required>
         <br><br>
 
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" required>
+        <label for="telefono">Teléfono</label>
+        <input type="text" id="telefono" name="telefono" required>
         <br><br>
 
-        <label for="direccion">Dirección:</label>
+        <label for="direccion">Sitio web</label>
         <input type="text" id="direccion" name="direccion" required>
         <br><br>
 
-        <label for="cuit">CUIT:</label>
+        <label for="cuit">Fecha de creacion</label>
+        <input type="date" id="cuit" name="cuit" required>
+        <br><br>
+
+        <label for="cuit">Otros detalles</label>
         <input type="text" id="cuit" name="cuit" required>
         <br><br>
 
