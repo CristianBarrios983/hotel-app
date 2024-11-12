@@ -64,4 +64,8 @@ Route::get('/recepcion', function () {
     return view('recepcion'); 
 })->name('recepcion')->middleware(['auth']);
 
+Route::get('/configuracion', function () {
+    return view('configuracion'); 
+})->name('configuracion')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
