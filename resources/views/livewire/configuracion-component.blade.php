@@ -1,46 +1,61 @@
-<div>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración - Reserva de Hotel</title>
-</head>
-<body>
-    <h2>Configuración</h2>
-    <form action="/guardar-configuracion" method="POST">
+<div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <div class="card shadow">
+                    <div class="card-header bg-secondary text-white text-center">
+                        <h4 class="mb-0">Configuración del Hotel</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/guardar-configuracion" method="POST">
+                            <!-- Nombre del Hotel -->
+                            <div class="mb-3">
+                                <label for="nombre_hotel" class="form-label">Nombre del Hotel</label>
+                                <input type="text" class="form-control" id="nombre_hotel" name="nombre_hotel" required>
+                            </div>
 
-        <label for="nombre">Nombre del Hotel</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br><br>
+                            <!-- Razón Social -->
+                            <div class="mb-3">
+                                <label for="razon_social" class="form-label">Razón Social</label>
+                                <input type="text" class="form-control" id="razon_social" name="razon_social" required>
+                            </div>
 
-        <label for="nombre">Razon social</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br><br>
+                            <!-- Correo Electrónico -->
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="correo" name="correo" required>
+                            </div>
 
-        <label for="correo">Email</label>
-        <input type="email" id="correo" name="correo" required>
-        <br><br>
+                            <!-- Teléfono -->
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono" required>
+                            </div>
 
-        <label for="telefono">Teléfono</label>
-        <input type="text" id="telefono" name="telefono" required>
-        <br><br>
+                            <!-- Sitio Web -->
+                            <div class="mb-3">
+                                <label for="sitio_web" class="form-label">Sitio Web</label>
+                                <input type="text" class="form-control" id="sitio_web" name="sitio_web" required>
+                            </div>
 
-        <label for="direccion">Sitio web</label>
-        <input type="text" id="direccion" name="direccion" required>
-        <br><br>
+                            <!-- Fecha de Creación -->
+                            <div class="mb-3">
+                                <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
+                                <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required>
+                            </div>
 
-        <label for="cuit">Fecha de creacion</label>
-        <input type="date" id="cuit" name="cuit" required>
-        <br><br>
+                            <!-- Otros Detalles -->
+                            <div class="mb-3">
+                                <label for="otros_detalles" class="form-label">Otros Detalles</label>
+                                <textarea class="form-control" id="otros_detalles" name="otros_detalles" rows="3"></textarea>
+                            </div>
 
-        <label for="cuit">Otros detalles</label>
-        <input type="text" id="cuit" name="cuit" required>
-        <br><br>
-
-        <button type="submit">Guardar Configuración</button>
-    </form>
-</body>
-</html>
-
-</div>
+                            <!-- Botón de Guardar -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
