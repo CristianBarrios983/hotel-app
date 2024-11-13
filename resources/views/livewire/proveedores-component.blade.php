@@ -15,7 +15,6 @@
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nombre de Proveedor</th>
                             <th scope="col">Telefono</th>
                             <th scope="col">Email</th>
@@ -29,7 +28,6 @@
                     <tbody>
                     @foreach ($proveedores as $proveedor)
                         <tr>
-                        <th scope="row">{{ $proveedor->id }}</th>
                         <td>{{ $proveedor->nombre_proveedor }}</td>
                         <td>{{ $proveedor->telefono }}</td>
                         <td>{{ $proveedor->email }}</td>

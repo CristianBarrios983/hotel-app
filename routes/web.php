@@ -48,6 +48,10 @@ Route::get('/productos', function () {
     return view('productos'); 
 })->name('productos')->middleware(['auth']);
 
+Route::get('/proveedores', function () {
+    return view('proveedores'); 
+})->name('proveedores')->middleware(['auth']);
+
 Route::get('/categorias', function () {
     return view('categorias'); 
 })->name('categorias')->middleware(['auth']);
