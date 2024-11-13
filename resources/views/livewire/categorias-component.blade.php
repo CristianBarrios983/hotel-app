@@ -15,7 +15,6 @@
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nombre categoria</th>
                             <th scope="col">Descripcion</th>
                             <th scope="col">Fecha de creacion</th>
@@ -25,7 +24,6 @@
                     <tbody>
                     @foreach ($categorias as $categoria)
                         <tr>
-                            <th scope="row">{{ $categoria->id }}</th>
                             <td>{{ $categoria->nombre_categoria }}</td>
                             <td>{{ $categoria->descripcion }}</td>
                             <td>{{ $categoria->created_at->format('d/m/Y') }}</td>
