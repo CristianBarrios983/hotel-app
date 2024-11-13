@@ -9,7 +9,6 @@
                 </div>
                 <div class="modal-body">
                     <!-- Información del Pedido -->
-                    <h6><strong>ID del Pedido:</strong> 1</h6>
                     <h6><strong>Proveedor:</strong> Higiene Total</h6>
                     <h6><strong>Fecha de Pedido:</strong> 20-10-2024</h6>
                     <h6><strong>Fecha de Entrega:</strong> 06-11-2024</h6>
@@ -63,7 +62,6 @@
             <table class="table table-hover" id="myTable">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Pedido</th>
                         <th scope="col">Proveedor</th>
                         <th scope="col">Fecha de pedido</th>
@@ -75,7 +73,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
                         <td>12</td>
                         <td>Higiene Total</td>
                         <td>20-10-2024</td>
