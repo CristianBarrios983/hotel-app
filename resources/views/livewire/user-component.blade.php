@@ -7,7 +7,6 @@
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Email</th>
                             <!-- <th scope="col">Rol</th> -->
@@ -18,7 +17,6 @@
                     <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <th scope="row">{{ $user->id }}</th>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->format('d/m/Y') }}</td>
