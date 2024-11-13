@@ -15,7 +15,6 @@
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nombre servicio</th>
                             <th scope="col">Descripcion</th>
                             <th scope="col">Precio</th>
@@ -27,7 +26,6 @@
                     <tbody>
                     @foreach ($servicios as $servicio)
                         <tr>
-                            <th scope="row">{{ $servicio->id }}</th>
                             <td>{{ $servicio->nombre }}</td>
                             <td>{{ $servicio->descripcion }}</td>
                             <td>{{ $servicio->precio }}</td>
