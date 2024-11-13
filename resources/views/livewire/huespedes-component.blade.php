@@ -18,7 +18,6 @@
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellido</th>
                             <th scope="col">Fecha de nacimiento</th>
@@ -34,7 +33,6 @@
                     <tbody>
                     @foreach ($huespedes as $huesped)
                         <tr>
-                            <th scope="row">{{ $huesped->id }}</th>
                             <td>{{ $huesped->nombre }}</td>
                             <td>{{ $huesped->apellido }}</td>
                             <td>{{ $huesped->fecha_nacimiento ? \Carbon\Carbon::parse($huesped->fecha_nacimiento)->format('d/m/Y') : 'No disponible' }}</td>
