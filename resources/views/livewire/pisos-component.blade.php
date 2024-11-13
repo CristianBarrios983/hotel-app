@@ -15,7 +15,6 @@
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Numero de piso</th>
                             <th scope="col">Descripcion</th>
                             <th scope="col">Fecha de creacion</th>
@@ -25,7 +24,6 @@
                     <tbody>
                     @foreach ($pisos as $piso)
                         <tr>
-                            <th scope="row">{{ $piso->id }}</th>
                             <td>{{ $piso->numero_piso }}</td>
                             <td>{{ $piso->descripcion }}</td>
                             <td>{{ $piso->created_at->format('d/m/Y') }}</td>
