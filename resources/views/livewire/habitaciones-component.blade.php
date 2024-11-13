@@ -16,7 +16,6 @@
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Número de Habitación</th>
                             <th scope="col">Capacidad</th>
                             <th scope="col">Tamaño (m²)</th>
@@ -33,7 +32,6 @@
                     <tbody>
                     @foreach ($habitaciones as $habitacion)
                         <tr>
-                            <th scope="row">{{ $habitacion->id }}</th>
                             <td>{{ $habitacion->numero_habitacion }}</td>
                             <td>{{ $habitacion->capacidad }}</td>
                             <td>{{ $habitacion->tamano }}</td>
