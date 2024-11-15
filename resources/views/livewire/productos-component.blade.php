@@ -27,24 +27,23 @@
                     </thead>
                     <tbody>
                     @foreach ($productos as $producto)
-                        <tr>
-                            <td>{{ $producto->nombre }}</td>
-                            <td>{{ $producto->descripcion }}</td>
-                            <td>${{ $producto->precio }}</td>
-                            <td>{{ $producto->stock }}</td>
-                            <td>{{ $producto->stock_minimo }}</td>
-                            <td>{{ $producto->categoria_id }}</td>
-                            <td>{{ $producto->created_at->format('d/m/Y') }}</td>
-                            <td class="text-center">
-                                <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $producto->id }})">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar({{ $producto->id }})">
-                                    <i class="bi bi-trash-fill"></i>
-                                </a>
-                            </td>
-                        </tr>
-
+                    <tr>
+                        <td>{{ $producto->nombre }}</td>
+                        <td>{{ $producto->descripcion }}</td>
+                        <td>${{ $producto->precio }}</td>
+                        <td>{{ $producto->stock }}</td>
+                        <td>{{ $producto->stock_minimo }}</td>
+                        <td>{{ $producto->categoria->nombre_categoria ?? 'Sin categoría' }}</td>
+                        <td>{{ $producto->created_at->format('d/m/Y') }}</td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-warning btn-sm" title="Editar" wire:click="abrirModalEditar({{ $producto->id }})">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar({{ $producto->id }})">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
 
                             <!-- Modal para Editar Categoria -->
                             @if($isEditModalOpen)
