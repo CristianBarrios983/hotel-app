@@ -22,7 +22,8 @@ class ProveedoresComponent extends Component
 
     public function render()
     {
-        $this->proveedores = Proveedores::all();
+        // $this->proveedores = Proveedores::all();
+        $this->proveedores = Proveedores::with('categoria')->get();
         return view('livewire.proveedores-component')->layout('layouts.app');
     }
 
