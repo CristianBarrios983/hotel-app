@@ -33,7 +33,7 @@
                         <td>{{ $proveedor->email }}</td>
                         <td>{{ $proveedor->direccion }}</td>
                         <td>{{ $proveedor->descripcion }}</td>
-                        <td>{{ $proveedor->categoria_id }}</td>
+                        <td>{{ $proveedor->categoria->nombre_categoria ?? 'Sin categoría' }}</td>
                         <td>{{ $proveedor->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $proveedor->id }})">

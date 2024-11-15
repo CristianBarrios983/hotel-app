@@ -19,4 +19,11 @@ class Proveedores extends Model
         'descripcion',
         'categoria_id'
     ];
+
+
+    // Relación con la tabla categorías
+    public function categoria()
+    {
+        return $this->belongsTo(Categorias::class, 'categoria_id');
+    }
 }
