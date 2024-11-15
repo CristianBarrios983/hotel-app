@@ -69,7 +69,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Comprobantes</a>
+          <a class="nav-link" href="/mantenimiento">Mantenimiento</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Reportes</a>
