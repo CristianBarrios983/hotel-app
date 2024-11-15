@@ -21,12 +21,6 @@ class ProductosComponent extends Component
         $this->categorias = Categorias::all();
     }
 
-    public function categoria()
-    {
-        return $this->belongsTo(Categoria::class);
-    }
-
-
     public function render()
     {
         // $this->productos = Productos::all();
@@ -43,7 +37,7 @@ class ProductosComponent extends Component
         // )
         // ->get();
 
-        
+
         // Cargar los productos con sus categorías
         $this->productos = Productos::with('categoria')->get();
         return view('livewire.productos-component')->layout('layouts.app');
