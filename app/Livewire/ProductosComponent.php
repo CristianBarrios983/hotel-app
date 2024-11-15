@@ -23,7 +23,23 @@ class ProductosComponent extends Component
 
     public function render()
     {
-        $this->productos = Productos::all();
+        // $this->productos = Productos::all();
+        // $this->productos = Productos::join('categorias', 'categorias.id', '=', 'productos.categoria_id')
+        // ->select(
+        //     'productos.id', 
+        //     'productos.nombre as producto_nombre', 
+        //     'productos.descripcion', 
+        //     'productos.precio', 
+        //     'productos.stock', 
+        //     'productos.stock_minimo', 
+        //     'productos.created_at', 
+        //     'categorias.nombre_categoria as categoria'
+        // )
+        // ->get();
+
+
+        // Cargar los productos con sus categorías
+        $this->productos = Productos::with('categoria')->get();
         return view('livewire.productos-component')->layout('layouts.app');
     }
 
