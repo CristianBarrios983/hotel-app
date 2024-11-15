@@ -29,7 +29,8 @@ class HabitacionesComponent extends Component
 
     public function render()
     {
-        $this->habitaciones = Habitacion::all();
+        // $this->habitaciones = Habitacion::all();
+        $this->habitaciones = Habitacion::with(['pisos', 'tipos_habitaciones'])->get();
         return view('livewire.habitaciones-component')->layout('layouts.app');
     }
 

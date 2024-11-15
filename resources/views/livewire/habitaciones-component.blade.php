@@ -39,8 +39,8 @@
                             <td>{{ $habitacion->tipo_cama }}</td>
                             <td>${{ $habitacion->precio_por_noche }}</td>
                             <td class="text-success">{{ $habitacion->disponibilidad }}</td>
-                            <td>{{ $habitacion->tipo_habitacion_id }}</td>
-                            <td>{{ $habitacion->piso_id }}</td>
+                            <td>{{ $habitacion->tipos_habitaciones->nombre_tipo ?? 'Sin tipo definido' }}</td>
+                            <td>{{ $habitacion->pisos->numero_piso ?? 'Sin piso definido' }}</td>
                             <td>{{ $habitacion->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $habitacion->id }})">
