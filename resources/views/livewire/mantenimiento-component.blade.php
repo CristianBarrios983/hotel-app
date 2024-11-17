@@ -103,12 +103,12 @@
 
 
 <!-- Vista alternativa -->
-<div class="content p-4">
+<!-- <div class="content p-4">
   <h1 class="text-dark mb-4">Módulo de Mantenimiento</h1>
 
-  <div class="row">
+  <div class="row"> -->
     <!-- Estado de Mantenimiento -->
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-header">
           Estado de Mantenimiento
@@ -118,10 +118,10 @@
           <p class="card-text">Áreas comunes en mantenimiento: <strong>2</strong></p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Mantenimientos Pendientes -->
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-header">
           Mantenimientos Pendientes
@@ -134,7 +134,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Historial de Mantenimientos -->
     <!-- <div class="col-md-4">
@@ -153,8 +153,8 @@
   </div>
 
   <div class="row">
-    <!-- Accesos Rápidos -->
-    <div class="col-md-4">
+     Accesos Rápidos -->
+    <!-- <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-header">
           Accesos Rápidos
@@ -168,10 +168,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --> 
 
   <!-- Modal para Registrar Nuevo Mantenimiento -->
-  <div class="modal fade" id="modalRegistrarMantenimiento" tabindex="-1" aria-labelledby="modalRegistrarMantenimientoLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="modalRegistrarMantenimiento" tabindex="-1" aria-labelledby="modalRegistrarMantenimientoLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -202,4 +202,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div> --> 
