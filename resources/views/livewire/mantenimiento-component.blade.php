@@ -100,3 +100,106 @@
         @endif
     </div>
 </div>
+
+
+<!-- Vista alternativa -->
+<div class="content p-4">
+  <h1 class="text-dark mb-4">Módulo de Mantenimiento</h1>
+
+  <div class="row">
+    <!-- Estado de Mantenimiento -->
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          Estado de Mantenimiento
+        </div>
+        <div class="card-body">
+          <p class="card-text">Habitaciones pendientes de mantenimiento: <strong>5</strong></p>
+          <p class="card-text">Áreas comunes en mantenimiento: <strong>2</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mantenimientos Pendientes -->
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          Mantenimientos Pendientes
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Reparación de aire acondicionado - Habitación 305</li>
+            <li>Reemplazo de bombilla - Pasillo 2</li>
+            <li>Revisión de fontanería - Habitación 202</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historial de Mantenimientos -->
+    <!-- <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          Historial de Mantenimiento
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Reparación de cerradura - Habitación 101 (Realizado el 12/11/2024)</li>
+            <li>Revisión de calefacción - Habitación 205 (Realizado el 10/11/2024)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Accesos Rápidos -->
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          Accesos Rápidos
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><a href="#mantenimientosPendientes">Ver Mantenimientos Pendientes</a></li>
+            <li><a href="#historialMantenimientos">Ver Historial de Mantenimiento</a></li>
+            <li><a href="#registrarMantenimiento" data-bs-toggle="modal" data-bs-target="#modalRegistrarMantenimiento">Registrar Nuevo Mantenimiento</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Registrar Nuevo Mantenimiento -->
+  <div class="modal fade" id="modalRegistrarMantenimiento" tabindex="-1" aria-labelledby="modalRegistrarMantenimientoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegistrarMantenimientoLabel">Registrar Nuevo Mantenimiento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="habitacion" class="form-label">Habitación/Área</label>
+              <input type="text" class="form-control" id="habitacion" placeholder="Ej. Habitación 305">
+            </div>
+            <div class="mb-3">
+              <label for="descripcion" class="form-label">Descripción del Problema</label>
+              <textarea class="form-control" id="descripcion" rows="3" placeholder="Describa el problema"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="prioridad" class="form-label">Prioridad</label>
+              <select class="form-control" id="prioridad">
+                <option>Alta</option>
+                <option>Media</option>
+                <option>Baja</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar Mantenimiento</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
