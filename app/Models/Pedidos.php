@@ -11,5 +11,17 @@ class Pedidos extends Model
 
     protected $table = 'pedidos';
 
+    protected $fillable = [
+        'proveedor_id',
+        'fecha_entrega',
+        'estado_pedido',
+        'total',
+    ];
+
+    // Relación con la tabla proveedores
+    public function proveedores()
+    {
+        return $this->belongsTo(Proveedores::class, 'proveedor_id');
+    }
 
 }

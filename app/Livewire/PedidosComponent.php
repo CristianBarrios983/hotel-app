@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Pedidos;
 
 class PedidosComponent extends Component
 {
@@ -11,7 +12,7 @@ class PedidosComponent extends Component
 
     public $pedidos, $detallePedido = [], $productos, $proveedores;
 
-    public $pedidoId, $proveedorId, $fechaPedido, $fechaEntrega, $estado, $total;
+    public $pedidoId, $proveedorId, $fechaEntrega, $estado, $total;
     public $productosSeleccionados = []; // Para crear pedidos.
 
     public function cambiarVista($vista)
@@ -21,7 +22,8 @@ class PedidosComponent extends Component
 
     public function render()
     {
-        return view('livewire.pedidos-component');
+        $this->pedidos = Pedidos::all();
+        return view('livewire.pedidos-component')->layout('layouts.app');
     }
 
 }

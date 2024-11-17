@@ -74,13 +74,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($pedidos as $pedido)
                         <tr>
-                            <td>12</td>
-                            <td>Higiene Total</td>
-                            <td>20-10-2024</td>
-                            <td>06-11-2024</td>
-                            <td>Completado</td>
-                            <td>$200</td>
+                            <td>{{ $pedido->id }}</td>
+                            <td>{{ $pedido->proveedores->nombre_proveedor ?? 'Sin proveedor definido' }}</td>
+                            <td>{{ $pedido->created_at->format('d/m/Y') }}</td>
+                            <td>{{ $pedido->fecha_entrega }}</td>
+                            <td>{{ $pedido->estado_pedido }}</td>
+                            <td>${{ $pedido->total }}</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-info btn-sm" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detallePedidoModal">
                                     <i class="bi bi-eye-fill"></i>
@@ -93,6 +94,7 @@
                                 </a>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
