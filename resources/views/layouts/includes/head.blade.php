@@ -9,3 +9,30 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <title>{{ config('app.name', 'Laravel') }}</title>
+
+
+<!-- Importar la fuente Funnel Sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    
+<style>
+    /* Aplicar Funnel Sans globalmente */
+    body {
+        font-family: "Funnel Sans", sans-serif;
+        font-weight: 400; /* Peso normal */
+    }
+
+    /* Personalización */
+    .light {
+        font-weight: 300; /* Ligero */
+    }
+
+    .bold {
+        font-weight: 700; /* Negrita */
+    }
+
+    .italic {
+        font-style: italic; /* Cursiva */
+    }
+</style>
