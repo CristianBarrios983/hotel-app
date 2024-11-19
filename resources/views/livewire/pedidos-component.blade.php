@@ -60,6 +60,14 @@
                 <!-- <button class="btn btn-primary">Registrar</button> -->
                 <a href="#" class="btn btn-primary" wire:click="cambiarVista('create')">Crear Pedido</a>
             </div>
+
+            <!-- Mensajes -->
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+
             <div class="table-responsive">
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark">
@@ -77,12 +85,13 @@
                     @foreach ($pedidos as $pedido)
                         <tr>
                             <td>{{ $pedido->id }}</td>
-                            <td>{{ $pedido->proveedores->nombre_proveedor ?? 'Sin proveedor definido' }}</td>
+                            <td>{{ $pedido->proveedor->nombre_proveedor }}</td>
                             <td>{{ $pedido->created_at->format('d/m/Y') }}</td>
-                            <td>{{ $pedido->fecha_entrega }}</td>
+                            <td>{{ $pedido->fecha_entrega->format('d-m-Y') }}</td>
                             <td>{{ $pedido->estado_pedido }}</td>
-                            <td>${{ $pedido->total }}</td>
+                            <td>${{ number_format($pedido->total, 2) }}</td>
                             <td class="text-center">
+                                <!-- Acciones -->
                                 <a href="#" class="btn btn-info btn-sm" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detallePedidoModal">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
@@ -121,6 +130,13 @@
         <div class="content p-4">
             <h1 class="text-dark mb-4">Realizar Pedido</h1>
 
+            <!-- Mensajes -->
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+
             <div class="row">
                 <!-- Sección de Selección de Proveedor -->
                 <div class="col-md-12 mb-4">
@@ -131,11 +147,11 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="proveedor" class="form-label">Proveedor</label>
-                                <select class="form-select" id="proveedor">
+                                <select class="form-select" id="proveedor" wire:model="proveedor_id">
                                     <option value="">Seleccione un proveedor</option>
-                                    <option value="1">Proveedor A</option>
-                                    <option value="2">Proveedor B</option>
-                                    <option value="3">Proveedor C</option>
+                                    @foreach ($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->id }}">{{ $proveedor->nombre_proveedor }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -160,20 +176,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach ($productos as $producto)
                                     <tr>
-                                        <td>Producto A</td>
-                                        <td>$10.00</td>
-                                        <td>50</td>
+                                        <td>{{ $producto->nombre }}</td>
+                                        <td>${{ number_format($producto->precio, 2) }}</td>
+                                        <td>{{ $producto->stock }}</td>
                                         <td>
-                                            <input type="number" class="form-control" min="1" max="50" value="1" style="width: 80px;">
+                                            <!-- Vincular la cantidad al atributo de Livewire -->
+                                            <input 
+                                                type="number" 
+                                                class="form-control" 
+                                                min="1" 
+                                                max="{{ $producto->stock }}" 
+                                                wire:model.defer="cantidad.{{ $producto->id }}" 
+                                                value="1" 
+                                                style="width: 80px;">
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">
+                                            <!-- Llamar al método Livewire sin usar `$` para cantidades -->
+                                            <button 
+                                                class="btn btn-primary btn-sm" 
+                                                wire:click="agregarProducto({{ $producto->id }})">
                                                 <i class="bi bi-cart-plus"></i> Añadir
                                             </button>
                                         </td>
                                     </tr>
-                                    <!-- Repetir filas según los productos -->
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -197,13 +225,28 @@
                                     </tr>
                                 </thead>
                                 <tbody id="resumenPedido">
-                                    <!-- Productos añadidos aparecerán aquí -->
+                                @foreach ($productosSeleccionados as $producto)
+                                    <tr>
+                                        <td>{{ $producto['nombre'] }}</td>
+                                        <td>{{ $producto['cantidad'] }}</td>
+                                        <td>${{ number_format($producto['subtotal'], 2) }}</td>
+                                        <td>
+                                            <button 
+                                                class="btn btn-danger btn-sm" 
+                                                wire:click="eliminarProducto({{ $producto['id'] }})">
+                                                <i class="bi bi-trash"></i> Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- Total del Pedido -->
                             <div class="d-flex justify-content-between align-items-center mt-4">
                                 <span><strong>Total:</strong></span>
-                                <span class="fs-4 text-success" id="totalPedido">$0.00</span>
+                                <span class="fs-4 text-success">
+                                    ${{ number_format(array_sum(array_column($productosSeleccionados, 'subtotal')), 2) }}
+                                </span>
                             </div>
                             <button class="btn btn-success w-100 mt-3">
                                 <i class="bi bi-check-circle"></i> Confirmar Pedido
