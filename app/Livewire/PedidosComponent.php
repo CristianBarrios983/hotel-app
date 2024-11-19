@@ -7,34 +7,26 @@ use App\Models\Pedidos;
 use App\Models\Proveedores;
 use App\Models\Productos;
 use App\Models\DetallePedido;
+use Illuminate\Support\Facades\DB;
 
 class PedidosComponent extends Component
 {
-
     public $viewMode = 'list';
+    public $proveedores, $productos, $pedidos;
+    public $cantidad = []; // Cantidades específicas para cada producto
+    public $productosSeleccionados = []; // Productos seleccionados en el pedido
+    public $proveedorSeleccionado; // Proveedor seleccionado en el formulario
 
-    public $pedidos, $detallePedido = [], $proveedores;
-    public $cantidad = [];
-
-    public $pedidoId, $proveedorId, $fechaEntrega, $estado, $total;
-    
-    public $productos = []; // Para almacenar los productos disponibles
-    public $productosSeleccionados = []; // Para almacenar los productos seleccionados en el pedido
+    public function mount()
+    {
+        $this->proveedores = Proveedores::all();
+        $this->productos = Productos::all();
+        $this->pedidos = Pedidos::obtenerPedidosConRelaciones();
+    }
 
     public function cambiarVista($vista)
     {
         $this->viewMode = $vista;
-    }
-
-    // Método para inicializar los datos
-    public function mount()
-    {
-        // Puedes cargar los proveedores y productos aquí si los necesitas
-        $this->proveedores = Proveedores::all();
-        $this->productos = Productos::all();
-
-        // Usamos el método del modelo para obtener los pedidos con sus relaciones
-        $this->pedidos = Pedidos::obtenerPedidosConRelaciones();
     }
 
     public function render()
@@ -43,17 +35,15 @@ class PedidosComponent extends Component
         return view('livewire.pedidos-component')->layout('layouts.app');
     }
 
-
     public function agregarProducto($productoId)
     {
         $cantidad = $this->cantidad[$productoId] ?? 1;
 
-        if (array_key_exists($productoId, $this->productosSeleccionados)) {
+        if (isset($this->productosSeleccionados[$productoId])) {
             // Aumentar la cantidad
             $this->productosSeleccionados[$productoId]['cantidad'] += $cantidad;
-            
-            // Actualizar el subtotal con la nueva cantidad
-            $this->productosSeleccionados[$productoId]['subtotal'] = 
+            // Actualizar el subtotal
+            $this->productosSeleccionados[$productoId]['subtotal'] =
                 $this->productosSeleccionados[$productoId]['precio'] * $this->productosSeleccionados[$productoId]['cantidad'];
         } else {
             $producto = $this->productos->find($productoId);
@@ -63,61 +53,60 @@ class PedidosComponent extends Component
                     'nombre' => $producto->nombre,
                     'precio' => $producto->precio,
                     'cantidad' => $cantidad,
-                    'subtotal' => $producto->precio * $cantidad,  // Multiplicamos precio por cantidad
+                    'subtotal' => $producto->precio * $cantidad,
                 ];
             }
-        }        
-
+        }
         // Reiniciar la cantidad después de agregar
         $this->cantidad[$productoId] = 1;
     }
-
 
     public function eliminarProducto($productoId)
     {
         unset($this->productosSeleccionados[$productoId]);
     }
 
+    public function registrarPedido()
+    {
+        $this->validate([
+            'proveedorSeleccionado' => 'required|exists:proveedores,id', // El proveedor debe ser válido
+            'productosSeleccionados' => 'required|array|min:1', // Debe haber al menos un producto seleccionado
+            'productosSeleccionados.*.id' => 'exists:productos,id', // Cada producto debe existir en la base de datos
+            'productosSeleccionados.*.cantidad' => 'required|integer|min:1', // Cada producto debe tener una cantidad válida
+        ]);
 
-    // Partes a utilizar mas tarde
-    // public $pedidoSeleccionado;
+        try {
+            DB::beginTransaction();
 
-    // public function verDetalle($id)
-    // {
-    //     $this->pedidoSeleccionado = Pedido::with('detallePedido.producto', 'proveedor')->find($id);
-    // }
+            $total = collect($this->productosSeleccionados)->sum(fn($producto) => $producto['cantidad'] * $producto['precio']);
 
+            // Crear el pedido
+            $pedido = Pedidos::create([
+                'proveedor_id' => $this->proveedorSeleccionado,
+                'estado_pedido' => 'pendiente',
+                'total' => $total,
+                'fecha_entrega' => null, // Campo para manejar después, cuando se cambie a entregado
+            ]);
 
+            // Crear los detalles del pedido
+            foreach ($this->productosSeleccionados as $producto) {
+                DetallePedido::create([
+                    'pedido_id' => $pedido->id,
+                    'producto_id' => $producto['id'],
+                    'cantidad' => $producto['cantidad'],
+                    'precio_unitario' => $producto['precio'],
+                    'subtotal' => $producto['cantidad'] * $producto['precio'],
+                ]);
+            }
 
-    // public $productosSeleccionados = [];
-    // public $resumenPedido = [];
-    // public $totalPedido = 0.00;
+            DB::commit();
 
-    // public function agregarProducto($id)
-    // {
-    //     $producto = Producto::find($id);
-    //     if ($producto) {
-    //         $this->resumenPedido[] = [
-    //             'id' => $producto->id,
-    //             'nombre' => $producto->nombre,
-    //             'precio' => $producto->precio,
-    //             'cantidad' => 1,
-    //             'subtotal' => $producto->precio,
-    //         ];
-    //         $this->actualizarTotal();
-    //     }
-    // }
-
-    // public function actualizarTotal()
-    // {
-    //     $this->totalPedido = array_sum(array_column($this->resumenPedido, 'subtotal'));
-    // }
-
-    // public function eliminarProducto($index)
-    // {
-    //     unset($this->resumenPedido[$index]);
-    //     $this->resumenPedido = array_values($this->resumenPedido); // Reindexar el array
-    //     $this->actualizarTotal();
-    // }
-
+            // Resetear el formulario y notificar
+            $this->reset(['proveedorSeleccionado', 'productosSeleccionados', 'cantidad']);
+            session()->flash('message', 'Pedido registrado exitosamente.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('message', 'Error al registrar el pedido. Por favor, intenta de nuevo.');
+        }
+    }
 }

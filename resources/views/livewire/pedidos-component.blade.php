@@ -87,7 +87,7 @@
                             <td>{{ $pedido->id }}</td>
                             <td>{{ $pedido->proveedor->nombre_proveedor }}</td>
                             <td>{{ $pedido->created_at->format('d/m/Y') }}</td>
-                            <td>{{ $pedido->fecha_entrega->format('d-m-Y') }}</td>
+                            <td>{{ $pedido->fecha_entrega ? \Carbon\Carbon::parse($pedido->fecha_entrega)->format('d/m/Y') : 'Sin fecha' }}</td>
                             <td>{{ $pedido->estado_pedido }}</td>
                             <td>${{ number_format($pedido->total, 2) }}</td>
                             <td class="text-center">
@@ -95,11 +95,16 @@
                                 <a href="#" class="btn btn-info btn-sm" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detallePedidoModal">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
-                                <a href="#" class="btn btn-warning btn-sm" title="Editar">
-                                    <i class="bi bi-pencil-fill"></i>
+                                <a href="#" class="btn btn-success btn-sm" title="Editar" wire:click="check({{ $pedido->id }})">
+                                    <!-- <i class="bi bi-pencil-fill"></i> -->
+                                     Check
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar">
-                                    <i class="bi bi-trash-fill"></i>
+                                <!-- <a href="#" class="btn btn-warning btn-sm" title="Editar">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a> -->
+                                <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="cancelar({{ $pedido->id }})">
+                                    <!-- <i class="bi bi-trash-fill"></i> -->
+                                     Cancelar
                                 </a>
                             </td>
                         </tr>
@@ -137,6 +142,18 @@
                 </div>
             @endif
 
+            <!-- Mensaje de error generico -->
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
             <div class="row">
                 <!-- Sección de Selección de Proveedor -->
                 <div class="col-md-12 mb-4">
@@ -147,7 +164,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="proveedor" class="form-label">Proveedor</label>
-                                <select class="form-select" id="proveedor" wire:model="proveedor_id">
+                                <select wire:model="proveedorSeleccionado" class="form-control">
                                     <option value="">Seleccione un proveedor</option>
                                     @foreach ($proveedores as $proveedor)
                                         <option value="{{ $proveedor->id }}">{{ $proveedor->nombre_proveedor }}</option>
@@ -248,7 +265,7 @@
                                     ${{ number_format(array_sum(array_column($productosSeleccionados, 'subtotal')), 2) }}
                                 </span>
                             </div>
-                            <button class="btn btn-success w-100 mt-3">
+                            <button class="btn btn-success w-100 mt-3" wire:click="registrarPedido">
                                 <i class="bi bi-check-circle"></i> Confirmar Pedido
                             </button>
                         </div>
