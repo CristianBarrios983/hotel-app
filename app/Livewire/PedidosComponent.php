@@ -109,4 +109,15 @@ class PedidosComponent extends Component
             session()->flash('message', 'Error al registrar el pedido. Por favor, intenta de nuevo.');
         }
     }
+
+    public function cancelar($pedidoId)
+    {
+        $pedido = Pedidos::find($pedidoId);
+        if ($pedido) {
+            $pedido->estado_pedido = 'Cancelado';
+            $pedido->save();
+            
+            session()->flash('message', 'Pedido cancelado exitosamente.');
+        }
+    }
 }
