@@ -95,10 +95,9 @@
                                 <a href="#" class="btn btn-info btn-sm" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detallePedidoModal">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
-                                @if($pedido->estado_pedido !== 'Cancelado')
-                                    <a href="#" class="btn btn-success btn-sm" title="Editar" wire:click="check({{ $pedido->id }})">
-                                        <!-- <i class="bi bi-pencil-fill"></i> -->
-                                        Check
+                                @if($pedido->estado_pedido !== 'Cancelado' && $pedido->estado_pedido !== 'Entregado')
+                                    <a href="#" class="btn btn-success btn-sm" title="Marcar como Entregado" wire:click="check({{ $pedido->id }})">
+                                        <i class="bi bi-check2-circle"></i> Entregado
                                     </a>
                                     <!-- <a href="#" class="btn btn-warning btn-sm" title="Editar">
                                         <i class="bi bi-pencil-fill"></i>

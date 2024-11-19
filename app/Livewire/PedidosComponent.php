@@ -83,7 +83,7 @@ class PedidosComponent extends Component
             // Crear el pedido
             $pedido = Pedidos::create([
                 'proveedor_id' => $this->proveedorSeleccionado,
-                'estado_pedido' => 'pendiente',
+                'estado_pedido' => 'Pendiente',
                 'total' => $total,
                 'fecha_entrega' => null, // Campo para manejar después, cuando se cambie a entregado
             ]);
@@ -118,6 +118,17 @@ class PedidosComponent extends Component
             $pedido->save();
             
             session()->flash('message', 'Pedido cancelado exitosamente.');
+        }
+    }
+
+    public function check($pedidoId)
+    {
+        $pedido = Pedidos::find($pedidoId);
+        if ($pedido) {
+            $pedido->estado_pedido = 'Entregado';
+            $pedido->save();
+            
+            session()->flash('message', 'Pedido marcado como entregado exitosamente.');
         }
     }
 }
