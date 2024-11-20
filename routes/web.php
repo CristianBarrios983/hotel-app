@@ -48,18 +48,6 @@ Route::get('/productos', function () {
     return view('productos'); 
 })->name('productos')->middleware(['auth']);
 
-Route::get('/proveedores', function () {
-    return view('proveedores'); 
-})->name('proveedores')->middleware(['auth']);
-
-Route::get('/productos', function () {
-    return view('productos'); 
-})->name('productos')->middleware(['auth']);
-
-Route::get('/proveedores', function () {
-    return view('proveedores'); 
-})->name('proveedores')->middleware(['auth']);
-
 Route::get('/categorias', function () {
     return view('categorias'); 
 })->name('categorias')->middleware(['auth']);
@@ -71,5 +59,17 @@ Route::get('/servicios', function () {
 Route::get('/pedidos', function () {
     return view('pedidos'); 
 })->name('pedidos')->middleware(['auth']);
+
+Route::get('/recepcion', function () {
+    return view('recepcion'); 
+})->name('recepcion')->middleware(['auth']);
+
+Route::get('/mantenimiento', function () {
+    return view('mantenimiento'); 
+})->name('mantenimiento')->middleware(['auth']);
+
+Route::get('/configuracion', function () {
+    return view('configuracion'); 
+})->name('configuracion')->middleware(['auth']);
 
 require __DIR__.'/auth.php';
