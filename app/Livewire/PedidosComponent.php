@@ -16,6 +16,8 @@ class PedidosComponent extends Component
     public $cantidad = []; // Cantidades específicas para cada producto
     public $productosSeleccionados = []; // Productos seleccionados en el pedido
     public $proveedorSeleccionado; // Proveedor seleccionado en el formulario
+    public $isDetalleModalOpen = false;
+    public $pedidoSeleccionado;
 
     public function mount()
     {
@@ -123,12 +125,49 @@ class PedidosComponent extends Component
 
     public function check($pedidoId)
     {
-        $pedido = Pedidos::find($pedidoId);
-        if ($pedido) {
+        try {
+            DB::beginTransaction(); // Inicia la transacción
+
+            $pedido = Pedidos::find($pedidoId);
+            if (!$pedido) {
+                throw new \Exception('Pedido no encontrado');
+            }
+
+            // Actualiza el pedido
             $pedido->estado_pedido = 'Entregado';
+            $pedido->fecha_entrega = now();
             $pedido->save();
-            
+
+            // Actualiza el stock de productos
+            foreach($pedido->detalles as $detalle) {
+                $producto = Productos::find($detalle->producto_id);
+                if (!$producto) {
+                    throw new \Exception('Producto no encontrado');
+                }
+                $producto->stock += $detalle->cantidad;
+                $producto->save();
+            }
+
+            DB::commit(); // Confirma todas las operaciones
             session()->flash('message', 'Pedido marcado como entregado exitosamente.');
+
+        } catch (\Exception $e) {
+            DB::rollBack(); // Revierte todas las operaciones si hay error
+            session()->flash('error', 'Error al procesar el pedido: ' . $e->getMessage());
         }
+    }
+
+    
+    public function verDetalles($pedidoId)
+    {
+        $this->pedidoSeleccionado = Pedidos::with(['proveedor', 'detalles.producto'])
+            ->findOrFail($pedidoId);
+        $this->isDetalleModalOpen = true;
+    }
+
+    public function cerrarModalDetalle()
+    {
+        $this->isDetalleModalOpen = false;
+        $this->pedidoSeleccionado = null;
     }
 }

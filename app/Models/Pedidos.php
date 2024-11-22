@@ -29,6 +29,11 @@ class Pedidos extends Model
         return $this->hasMany(DetallePedido::class, 'pedido_id');
     }
 
+    public function detalles()
+    {
+        return $this->hasMany(DetallePedido::class, 'pedido_id');
+    }
+
     // Relación con la tabla proveedores
     public function proveedor()
     {
