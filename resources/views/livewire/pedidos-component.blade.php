@@ -89,7 +89,15 @@
                             <td>{{ $pedido->proveedor->nombre_proveedor }}</td>
                             <td>{{ $pedido->created_at->format('d/m/Y') }}</td>
                             <td>{{ $pedido->fecha_entrega ? \Carbon\Carbon::parse($pedido->fecha_entrega)->format('d/m/Y') : 'Sin fecha' }}</td>
-                            <td>{{ $pedido->estado_pedido }}</td>
+                            <td>
+                            <span class="badge {{ 
+                                $pedido->estado_pedido === 'Entregado' ? 'bg-success' : 
+                                ($pedido->estado_pedido === 'Pendiente' ? 'bg-warning' : 
+                                'bg-danger') 
+                            }}">
+                                {{ $pedido->estado_pedido }}
+                            </span>
+                            </td>
                             <td>${{ number_format($pedido->total, 2) }}</td>
                             <td class="text-center">
                                 <!-- Acciones -->
