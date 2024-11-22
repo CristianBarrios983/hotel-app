@@ -2,56 +2,57 @@
     <!-- Aqui va la vista principal de pedidos -->
     <div>
         <!-- Modal de Detalles -->
-        <div class="modal fade" id="detallePedidoModal" tabindex="-1" aria-labelledby="detallePedidoLabel" aria-hidden="true">
+        @if($isDetalleModalOpen)
+        <div class="modal fade show d-block" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="detallePedidoLabel">Detalles del Pedido</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title">Detalles del Pedido #{{ $pedidoSeleccionado->id }}</h5>
+                        <button type="button" class="btn-close" wire:click="cerrarModalDetalle" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Información del Pedido -->
-                        <h6><strong>Proveedor:</strong> Higiene Total</h6>
-                        <h6><strong>Fecha de Pedido:</strong> 20-10-2024</h6>
-                        <h6><strong>Fecha de Entrega:</strong> 06-11-2024</h6>
-                        <h6><strong>Estado:</strong> Completado</h6>
-                        <h6><strong>Total:</strong> $200</h6>
+                        @if($pedidoSeleccionado)
+                            <!-- Información del Pedido -->
+                            <h6><strong>Proveedor:</strong> {{ $pedidoSeleccionado->proveedor->nombre_proveedor }}</h6>
+                            <h6><strong>Fecha de Pedido:</strong> {{ $pedidoSeleccionado->created_at->format('d-m-Y') }}</h6>
+                            <h6><strong>Fecha de Entrega:</strong> {{ $pedidoSeleccionado->fecha_entrega ? \Carbon\Carbon::parse($pedidoSeleccionado->fecha_entrega)->format('d-m-Y') : 'Sin fecha' }}</h6>
+                            <h6><strong>Estado:</strong> {{ $pedidoSeleccionado->estado_pedido }}</h6>
+                            <h6><strong>Total:</strong> ${{ number_format($pedidoSeleccionado->total, 2) }}</h6>
 
-                        <!-- Tabla de Productos -->
-                        <div class="mt-4">
-                            <h6><strong>Productos:</strong></h6>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Producto</th>
-                                        <th>Cantidad</th>
-                                        <th>Precio Unitario</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Jabón Antibacterial</td>
-                                        <td>10</td>
-                                        <td>$5.00</td>
-                                        <td>$50.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shampoo</td>
-                                        <td>5</td>
-                                        <td>$30.00</td>
-                                        <td>$150.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <!-- Tabla de Productos -->
+                            <div class="mt-4">
+                                <h6><strong>Productos:</strong></h6>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($pedidoSeleccionado->detalles as $detalle)
+                                            <tr>
+                                                <td>{{ $detalle->producto->nombre }}</td>
+                                                <td>{{ $detalle->cantidad }}</td>
+                                                <td>${{ number_format($detalle->precio_unitario, 2) }}</td>
+                                                <td>${{ number_format($detalle->cantidad * $detalle->precio_unitario, 2) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" wire:click="cerrarModalDetalle">Cerrar</button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="modal-backdrop fade show"></div>
+    @endif
 
         <!-- Tabla con botón para Ver Detalles -->
         <div class="content p-4">
@@ -92,7 +93,8 @@
                             <td>${{ number_format($pedido->total, 2) }}</td>
                             <td class="text-center">
                                 <!-- Acciones -->
-                                <a href="#" class="btn btn-info btn-sm" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#detallePedidoModal">
+                                <a href="#" class="btn btn-info btn-sm"     title="Ver Detalles" 
+                                wire:click="verDetalles({{ $pedido->id }})">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
                                 @if($pedido->estado_pedido !== 'Cancelado' && $pedido->estado_pedido !== 'Entregado')
@@ -115,6 +117,7 @@
             </div>
         </div>
     </div>
+
 @elseif ($viewMode === 'create')
     <!-- Aqui va la vista para crear pedido -->
     <div>

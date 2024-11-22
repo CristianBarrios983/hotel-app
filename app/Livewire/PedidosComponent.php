@@ -16,6 +16,8 @@ class PedidosComponent extends Component
     public $cantidad = []; // Cantidades específicas para cada producto
     public $productosSeleccionados = []; // Productos seleccionados en el pedido
     public $proveedorSeleccionado; // Proveedor seleccionado en el formulario
+    public $isDetalleModalOpen = false;
+    public $pedidoSeleccionado;
 
     public function mount()
     {
@@ -130,5 +132,19 @@ class PedidosComponent extends Component
             
             session()->flash('message', 'Pedido marcado como entregado exitosamente.');
         }
+    }
+
+    
+    public function verDetalles($pedidoId)
+    {
+        $this->pedidoSeleccionado = Pedidos::with(['proveedor', 'detalles.producto'])
+            ->findOrFail($pedidoId);
+        $this->isDetalleModalOpen = true;
+    }
+
+    public function cerrarModalDetalle()
+    {
+        $this->isDetalleModalOpen = false;
+        $this->pedidoSeleccionado = null;
     }
 }
