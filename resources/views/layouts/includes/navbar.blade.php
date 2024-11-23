@@ -92,9 +92,7 @@
                     <hr class="dropdown-divider">
                 </li>
                 <li>
-                    <a href="#" wire:click.prevent="logout" class="dropdown-item w-full text-start">
-                        {{ __('Log Out') }}
-                    </a>
+                    <livewire:logout-component />
                 </li>
             </ul>
         </li>
@@ -103,5 +101,3 @@
     </div>
   </div>
 </nav>
-
-@livewire('logout-component')
