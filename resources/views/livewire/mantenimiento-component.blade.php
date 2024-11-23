@@ -16,44 +16,130 @@
         <table class="table table-hover" id="myTable">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">Habitación/Área</th>
+                    <th scope="col">Habitación</th>
                     <th scope="col">Descripción</th>
+                    <th scope="col">Personal</th>
                     <th scope="col">Fecha de Solicitud</th>
                     <th scope="col">Prioridad</th>
+                    <th scope="col">Estado</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Ejemplo de una fila de mantenimiento (sin lógica de foreach) -->
+                @foreach($mantenimientos as $mantenimiento)
                 <tr>
-                    <td>Habitación 101</td>
-                    <td>Mantenimiento de aire acondicionado</td>
-                    <td>15/11/2024</td>
-                    <td>Alta</td>
+                    <td>Habitación {{ $mantenimiento->habitacion->numero_habitacion }}</td>
+                    <td>{{ $mantenimiento->descripcion }}</td>
+                    <td>{{ $mantenimiento->personal }}</td>
+                    <td>{{ $mantenimiento->created_at->format('d/m/Y') }}</td>
+                    <td>
+                        <span class="badge {{ $mantenimiento->prioridad === 'Alta' ? 'bg-danger' : 
+                            ($mantenimiento->prioridad === 'Media' ? 'bg-warning' : 'bg-info') }}">
+                            {{ $mantenimiento->prioridad }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {{ 
+                            $mantenimiento->estado === 'Pendiente' ? 'bg-secondary' : 
+                            ($mantenimiento->estado === 'En Proceso' ? 'bg-primary' : 'bg-success') 
+                        }}">
+                            {{ $mantenimiento->estado }}
+                        </span>
+                    </td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar(1)">
-                            <i class="bi bi-pencil-fill"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar(1)">
-                            <i class="bi bi-trash-fill"></i>
-                        </a>
+                        @if($mantenimiento->estado === 'Pendiente')
+                            <button type="button" class="btn btn-sm btn-primary" title="En Proceso" 
+                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'En Proceso')">
+                                <i class="bi bi-gear-fill"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-success" title="Completado" 
+                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'Completado')">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </button>
+                            <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" 
+                                wire:click="abrirModalEditar({{ $mantenimiento->id }})">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm" title="Eliminar" 
+                                wire:click="eliminar({{ $mantenimiento->id }})">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        @elseif($mantenimiento->estado === 'En Proceso')
+                            <button type="button" class="btn btn-sm btn-success" title="Completado" 
+                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'Completado')">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </button>
+                        @else
+                            <span class="text-muted">Tarea completada</span>
+                        @endif
                     </td>
                 </tr>
-                <tr>
-                    <td>Área Común</td>
-                    <td>Reparación de lámparas</td>
-                    <td>14/11/2024</td>
-                    <td>Media</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar(2)">
-                            <i class="bi bi-pencil-fill"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm" title="Eliminar" wire:click="eliminar(2)">
-                            <i class="bi bi-trash-fill"></i>
-                        </a>
-                    </td>
-                </tr>
-                <!-- Fin de ejemplo -->
+
+                @if($isEditModalOpen)
+                <div class="modal fade show d-block" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editar Mantenimiento</h5>
+                                <button type="button" class="btn-close" wire:click="cerrarModalEditar" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="habitacion_id" class="form-label">Habitación</label>
+                                        <select class="form-select" wire:model="habitacion_id">
+                                            <option value="">Seleccione una habitación</option>
+                                            @foreach($habitaciones as $habitacion)
+                                                <option value="{{ $habitacion->id }}">
+                                                    Habitación {{ $habitacion->numero_habitacion }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('habitacion_id') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <textarea class="form-control" wire:model="descripcion" rows="3"></textarea>
+                                        @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="personal" class="form-label">Personal Asignado</label>
+                                        <select class="form-select" wire:model="personal">
+                                            <option value="">Seleccione personal</option>
+                                            <option value="Personal 1">Personal 1</option>
+                                            <option value="Personal 2">Personal 2</option>
+                                            <option value="Personal 3">Personal 3</option>
+                                            <option value="Personal 4">Personal 4</option>
+                                        </select>
+                                        @error('personal') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="prioridad" class="form-label">Prioridad</label>
+                                        <select class="form-select" wire:model="prioridad">
+                                            <option value="">Seleccione prioridad</option>
+                                            <option value="Alta">Alta</option>
+                                            <option value="Media">Media</option>
+                                            <option value="Baja">Baja</option>
+                                        </select>
+                                        @error('prioridad') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" wire:click="cerrarModalEditar">Cancelar</button>
+                                <button type="button" class="btn btn-primary" wire:click="actualizar">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-backdrop fade show"></div>
+            @endif
+
+                @endforeach
             </tbody>
         </table>
 
@@ -69,18 +155,38 @@
                         <div class="modal-body">
                             <form>
                                 <div class="mb-3">
-                                    <label for="habitacionArea" class="form-label">Habitación/Área</label>
-                                    <input type="text" class="form-control" wire:model="habitacionArea">
-                                    @error('habitacionArea') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <label for="habitacion_id" class="form-label">Habitación</label>
+                                    <select class="form-select" wire:model="habitacion_id">
+                                        <option value="">Seleccione una habitación</option>
+                                        @foreach($habitaciones as $habitacion)
+                                            <option value="{{ $habitacion->id }}">Habitación {{ $habitacion->numero_habitacion }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('habitacion_id') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="descripcion" class="form-label">Descripción</label>
-                                    <input type="text" class="form-control" wire:model="descripcion">
+                                    <textarea class="form-control" wire:model="descripcion" rows="3"></textarea>
                                     @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="personal" class="form-label">Personal Asignado</label>
+                                    <select class="form-select" wire:model="personal">
+                                        <option value="">Seleccione personal</option>
+                                        <option value="Personal 1">Personal 1</option>
+                                        <option value="Personal 2">Personal 2</option>
+                                        <option value="Personal 3">Personal 3</option>
+                                        <option value="Personal 4">Personal 4</option>
+                                    </select>
+                                    @error('personal') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="prioridad" class="form-label">Prioridad</label>
-                                    <select class="form-control" wire:model="prioridad">
+                                    <select class="form-select" wire:model="prioridad">
+                                        <option value="">Seleccione prioridad</option>
                                         <option value="Alta">Alta</option>
                                         <option value="Media">Media</option>
                                         <option value="Baja">Baja</option>
@@ -91,7 +197,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" wire:click="cerrarModalCrear">Cancelar</button>
-                            <button type="button" class="btn btn-primary" wire:click="almacenar">Registrar</button>
+                            <button type="button" class="btn btn-primary" wire:click="registrarMantenimiento">Registrar</button>
                         </div>
                     </div>
                 </div>

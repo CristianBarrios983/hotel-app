@@ -72,4 +72,8 @@ Route::get('/configuracion', function () {
     return view('configuracion'); 
 })->name('configuracion')->middleware(['auth']);
 
+Route::get('/mantenimiento', function () {
+    return view('mantenimiento'); 
+})->name('mantenimiento')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
