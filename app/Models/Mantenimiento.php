@@ -19,4 +19,10 @@ class Mantenimiento extends Model
         'prioridad',
         'personal_id'
     ];
+
+    // Relación con Habitación
+    public function habitacion()
+    {
+        return $this->belongsTo(Habitacion::class);
+    }
 }
