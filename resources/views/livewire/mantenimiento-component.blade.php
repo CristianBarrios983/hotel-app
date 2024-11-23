@@ -74,6 +74,71 @@
                         @endif
                     </td>
                 </tr>
+
+                @if($isEditModalOpen)
+                <div class="modal fade show d-block" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editar Mantenimiento</h5>
+                                <button type="button" class="btn-close" wire:click="cerrarModalEditar" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="habitacion_id" class="form-label">Habitación</label>
+                                        <select class="form-select" wire:model="habitacion_id">
+                                            <option value="">Seleccione una habitación</option>
+                                            @foreach($habitaciones as $habitacion)
+                                                <option value="{{ $habitacion->id }}">
+                                                    Habitación {{ $habitacion->numero_habitacion }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('habitacion_id') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <textarea class="form-control" wire:model="descripcion" rows="3"></textarea>
+                                        @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="personal" class="form-label">Personal Asignado</label>
+                                        <select class="form-select" wire:model="personal">
+                                            <option value="">Seleccione personal</option>
+                                            <option value="Personal 1">Personal 1</option>
+                                            <option value="Personal 2">Personal 2</option>
+                                            <option value="Personal 3">Personal 3</option>
+                                            <option value="Personal 4">Personal 4</option>
+                                        </select>
+                                        @error('personal') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="prioridad" class="form-label">Prioridad</label>
+                                        <select class="form-select" wire:model="prioridad">
+                                            <option value="">Seleccione prioridad</option>
+                                            <option value="Alta">Alta</option>
+                                            <option value="Media">Media</option>
+                                            <option value="Baja">Baja</option>
+                                        </select>
+                                        @error('prioridad') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" wire:click="cerrarModalEditar">Cancelar</button>
+                                <button type="button" class="btn btn-primary" wire:click="actualizar">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-backdrop fade show"></div>
+            @endif
+
                 @endforeach
             </tbody>
         </table>

@@ -12,6 +12,7 @@ class MantenimientoComponent extends Component
 
     public $habitaciones = [];
     public $mantenimientos;
+    public $mantenimientoId;
     public $habitacion_id, $descripcion, $personal, $prioridad, $estado;
 
     public $isCreateModalOpen = 0;
@@ -119,5 +120,52 @@ class MantenimientoComponent extends Component
             DB::rollBack();
             session()->flash('error', 'Error al actualizar el estado: ' . $e->getMessage());
         }
+    }
+
+    public function abrirModalEditar($id)
+    {
+        $this->cargarDatosMantenimiento($id);
+        $this->isEditModalOpen = true;
+    }
+
+    public function cerrarModalEditar()
+    {
+        $this->isEditModalOpen = false;
+        $this->resetearCampos();
+    }
+
+    private function cargarDatosMantenimiento($id) 
+    {
+        $mantenimiento = Mantenimiento::findOrFail($id);
+        $this->mantenimientoId = $mantenimiento->id;
+        $this->habitacion_id = $mantenimiento->habitacion_id;
+        $this->descripcion = $mantenimiento->descripcion;
+        $this->personal = $mantenimiento->personal;
+        $this->prioridad = $mantenimiento->prioridad;
+    }
+
+    public function actualizar()
+    {
+        $this->validate([
+            'habitacion_id' => 'required|exists:habitaciones,id',
+            'descripcion' => 'required|string',
+            'personal' => 'required|string',
+            'prioridad' => 'required|in:Alta,Media,Baja',
+        ]);
+
+        // Actualizar el mantenimiento en la base de datos
+        $mantenimiento = Mantenimiento::find($this->mantenimientoId);
+        $mantenimiento->update([
+            'habitacion_id' => $this->habitacion_id,
+            'descripcion' => $this->descripcion,
+            'personal' => $this->personal,
+            'prioridad' => $this->prioridad,
+        ]);
+
+        // Mostrar mensaje de éxito
+        session()->flash('message', 'Mantenimiento actualizado con éxito.');
+
+        // Cerrar el modal y resetear los campos
+        $this->cerrarModalEditar();
     }
 }
