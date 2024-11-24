@@ -61,60 +61,6 @@
             </div>
         </div>
         @endforeach
-
-        <!-- Habitación 102 (Ocupada) -->
-        <!--<div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="ocupada">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-danger text-white">
-                    <h5 class="card-title mb-0">Habitación 102</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-muted">Ocupada</p>
-                    <i class="bi bi-person-fill text-danger" style="font-size: 2rem;"></i>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-danger" title="Ver Huésped Actual">
-                        <i class="bi bi-person-badge"></i>
-                    </a>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- Habitación 103 (Reservada) -->
-        <!--  <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="reservada">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-warning text-white">
-                    <h5 class="card-title mb-0">Habitación 103</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-muted">Reservada</p>
-                    <i class="bi bi-calendar-check-fill text-warning" style="font-size: 2rem;"></i>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-warning" title="Ver Reserva / Check-in">
-                        <i class="bi bi-eye-fill"></i>
-                    </a>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- Nueva habitación en mantenimiento -->
-        <!--  <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="mantenimiento">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-info text-white">
-                    <h5 class="card-title mb-0">Habitación 104</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-muted">En Mantenimiento</p>
-                    <i class="bi bi-tools text-info" style="font-size: 2rem;"></i>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-info disabled" title="En Mantenimiento">
-                        <i class="bi bi-wrench-adjustable"></i>
-                    </a>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>
 
