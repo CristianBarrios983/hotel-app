@@ -56,4 +56,16 @@ Route::get('/recepcion', function () {
     return view('recepcion'); 
 })->name('recepcion')->middleware(['auth']);
 
+Route::get('/reservas', function () {
+    return view('reservas'); 
+})->name('reservas')->middleware(['auth']);
+
+Route::get('/check-in', function () {
+    return view('check-in'); 
+})->name('check-in')->middleware(['auth']);
+
+Route::get('/check-out', function () {
+    return view('check-out'); 
+})->name('check-out')->middleware(['auth']);
+
 require __DIR__.'/auth.php';

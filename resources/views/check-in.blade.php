@@ -1,5 +1,5 @@
 @extends('layouts.app') 
 
 @section('content')
-    @livewire('recepcion-component') 
+    @livewire('check-in-component') 
 @endsection
