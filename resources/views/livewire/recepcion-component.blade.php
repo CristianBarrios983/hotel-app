@@ -85,3 +85,28 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function filtrarHabitaciones(estado) {
+        const habitaciones = document.querySelectorAll('.habitacion');
+
+        habitaciones.forEach(habitacion => {
+            habitacion.style.display = "block";
+        });
+
+        habitaciones.forEach(habitacion => {
+
+            if (estado === "todas"){
+                habitacion.style.display = "block";
+            }else{
+                const estadoHabitacion = habitacion.dataset.estado;
+                //console.log(estadoHabitacion);
+                if(estadoHabitacion !== estado){
+                    habitacion.style.display = "none";
+                }
+            }  
+
+        });
+    }
+</script>
