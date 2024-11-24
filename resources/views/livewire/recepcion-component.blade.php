@@ -20,24 +20,50 @@
 
     <!-- Habitaciones -->
     <div class="row text-center">
-        <!-- Habitación 101 (Disponible) -->
-        <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="disponible">
+
+        @foreach ($habitaciones as $habitacion)
+        <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="{{ $habitacion->disponibilidad }}">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-success text-white">
-                    <h5 class="card-title mb-0">Habitación 101</h5>
+                <div class="card-header {{ 
+                    $habitacion->disponibilidad === 'disponible' ? 'bg-success' :
+                    ($habitacion->disponibilidad === 'ocupada' ? 'bg-danger' :
+                    ($habitacion->disponibilidad === 'reservada' ? 'bg-warning' : 
+                    'bg-info')) }} text-white">
+                    <h5 class="card-title mb-0">Habitación {{ $habitacion->numero_habitacion }}</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text text-muted">Disponible</p>
-                    <i class="bi bi-door-open-fill text-success" style="font-size: 2rem;"></i>
+                    <p class="card-text text-muted text-capitalize">{{ $habitacion->disponibilidad }}</p>
+                    <i class="bi {{ 
+                        $habitacion->disponibilidad === 'disponible' ? 'bi-door-open-fill text-success' :
+                        ($habitacion->disponibilidad === 'ocupada' ? 'bi-person-fill text-danger' :
+                        ($habitacion->disponibilidad === 'reservada' ? 'bi-calendar-check-fill text-warning' : 
+                        'bi-tools text-info')) }}" 
+                        style="font-size: 2rem;"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-primary">Asignar</a>
+                    <a href="#" class="btn {{ 
+                        $habitacion->disponibilidad === 'disponible' ? 'btn-outline-primary' :
+                        ($habitacion->disponibilidad === 'ocupada' ? 'btn-outline-danger' :
+                        ($habitacion->disponibilidad === 'reservada' ? 'btn-outline-warning' : 
+                        'btn-outline-info')) }}" 
+                        title="{{ 
+                            $habitacion->disponibilidad === 'disponible' ? 'Hacer Reserva' :
+                            ($habitacion->disponibilidad === 'ocupada' ? 'Ver Huésped Actual' :
+                            ($habitacion->disponibilidad === 'reservada' ? 'Ver Reserva / Check-in' : 
+                            'En Mantenimiento')) }}">
+                        <i class="bi {{ 
+                            $habitacion->disponibilidad === 'disponible' ? 'bi-key-fill' :
+                            ($habitacion->disponibilidad === 'ocupada' ? 'bi-person-badge' :
+                            ($habitacion->disponibilidad === 'reservada' ? 'bi-eye-fill' : 
+                            'bi-wrench-adjustable')) }}"></i>
+                    </a>
                 </div>
             </div>
         </div>
+        @endforeach
 
         <!-- Habitación 102 (Ocupada) -->
-        <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="ocupada">
+        <!--<div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="ocupada">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-danger text-white">
                     <h5 class="card-title mb-0">Habitación 102</h5>
@@ -47,13 +73,15 @@
                     <i class="bi bi-person-fill text-danger" style="font-size: 2rem;"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-primary disabled">Asignar</a>
+                    <a href="#" class="btn btn-outline-danger" title="Ver Huésped Actual">
+                        <i class="bi bi-person-badge"></i>
+                    </a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Habitación 103 (Reservada) -->
-        <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="reservada">
+        <!--  <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="reservada">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-warning text-white">
                     <h5 class="card-title mb-0">Habitación 103</h5>
@@ -63,13 +91,15 @@
                     <i class="bi bi-calendar-check-fill text-warning" style="font-size: 2rem;"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-primary">Ver Reserva</a>
+                    <a href="#" class="btn btn-outline-warning" title="Ver Reserva / Check-in">
+                        <i class="bi bi-eye-fill"></i>
+                    </a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Nueva habitación en mantenimiento -->
-        <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="mantenimiento">
+        <!--  <div class="habitacion col-md-3 col-sm-6 mb-4" data-estado="mantenimiento">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-info text-white">
                     <h5 class="card-title mb-0">Habitación 104</h5>
@@ -79,10 +109,12 @@
                     <i class="bi bi-tools text-info" style="font-size: 2rem;"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-primary disabled">En Mantenimiento</a>
+                    <a href="#" class="btn btn-outline-info disabled" title="En Mantenimiento">
+                        <i class="bi bi-wrench-adjustable"></i>
+                    </a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
