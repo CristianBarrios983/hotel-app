@@ -75,5 +75,16 @@ Route::get('/configuracion', function () {
 Route::get('/mantenimiento', function () {
     return view('mantenimiento'); 
 })->name('mantenimiento')->middleware(['auth']);
+Route::get('/reservas', function () {
+    return view('reservas'); 
+})->name('reservas')->middleware(['auth']);
+
+Route::get('/check-in', function () {
+    return view('check-in'); 
+})->name('check-in')->middleware(['auth']);
+
+Route::get('/check-out', function () {
+    return view('check-out'); 
+})->name('check-out')->middleware(['auth']);
 
 require __DIR__.'/auth.php';
