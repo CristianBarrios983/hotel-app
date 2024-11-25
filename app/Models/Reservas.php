@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Reservas extends Model
 {
@@ -20,6 +21,19 @@ class Reservas extends Model
         'observaciones',
         'usuario_id'
     ];
+
+    // Función para calcular noches
+    public function getNochesAttribute()
+    {
+        if ($this->check_in && $this->check_out) {
+            $checkin = Carbon::parse($this->check_in);
+            $checkout = Carbon::parse($this->check_out);
+            
+            return floor($checkin->diffInDays($checkout));
+        }
+        
+        return 0;
+    }
 
     // Relaciones
     public function habitacion()
