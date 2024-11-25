@@ -75,4 +75,31 @@ class ReservasComponent extends Component
             session()->flash('error', 'Error al marcar la reserva como No Show. Por favor, intente nuevamente.');
         }
     }
+
+    public function cancelarReserva($id)
+    {
+        try {
+            $reserva = Reservas::find($id);
+            
+            if (!$reserva) {
+                session()->flash('error', 'Reserva no encontrada.');
+                return;
+            }
+
+            // Actualizar el estado de la reserva
+            $reserva->update([
+                'estado' => 'cancelada'
+            ]);
+
+            // Actualizar el estado de la habitación
+            $reserva->habitacion->update([
+                'disponibilidad' => 'disponible'
+            ]);
+
+            session()->flash('message', 'Reserva cancelada exitosamente.');
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error al cancelar la reserva. Por favor, intente nuevamente.');
+        }
+    }
 }
