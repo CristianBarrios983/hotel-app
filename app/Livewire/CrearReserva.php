@@ -57,7 +57,8 @@ class CrearReserva extends Component
                 'check_out' => $this->check_out,
                 'huesped_id' => $this->huesped_id,
                 'estado' => $this->estado,
-                'observaciones' => $this->observaciones
+                'observaciones' => $this->observaciones,
+                'usuario_id' => auth()->id()
             ]);
 
             // Actualizar el estado de la habitación a 'reservada'

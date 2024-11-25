@@ -17,7 +17,8 @@ class Reservas extends Model
         'check_out',
         'huesped_id',
         'estado',
-        'observaciones'
+        'observaciones',
+        'usuario_id'
     ];
 
     // Relaciones
@@ -29,5 +30,10 @@ class Reservas extends Model
     public function huesped()
     {
         return $this->belongsTo(Huesped::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
     }
 }
