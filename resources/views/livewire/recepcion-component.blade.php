@@ -41,22 +41,18 @@
                         style="font-size: 2rem;"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="{{ 
-                        $habitacion->disponibilidad === 'disponible' ? route('crear-reserva') : 
-                        ($habitacion->disponibilidad === 'ocupada' ?  :
-                        ($habitacion->disponibilidad === 'reservada' ?  : 
-                        'javascript:void(0)')) 
-                    }}"
-                    class="btn {{ 
-                        $habitacion->disponibilidad === 'disponible' ? 'btn-outline-primary' :
-                        ($habitacion->disponibilidad === 'ocupada' ? 'btn-outline-danger' :
-                        ($habitacion->disponibilidad === 'reservada' ? 'btn-outline-warning' : 
-                        'btn-outline-info')) }}" 
-                    title="{{ 
-                        $habitacion->disponibilidad === 'disponible' ? 'Hacer Reserva' :
-                        ($habitacion->disponibilidad === 'ocupada' ? 'Ver Huésped Actual' :
-                        ($habitacion->disponibilidad === 'reservada' ? 'Ver Reserva / Check-in' : 
-                        'En Mantenimiento')) }}">
+                    <a href="{{ $habitacion->disponibilidad === 'disponible' ? route('crear-reserva') : 'javascript:void(0)' }}"
+                       wire:click="{{ $habitacion->disponibilidad !== 'disponible' ? 'mostrarDetalles('.$habitacion->id.')' : '' }}"
+                       class="btn {{ 
+                           $habitacion->disponibilidad === 'disponible' ? 'btn-outline-primary' :
+                           ($habitacion->disponibilidad === 'ocupada' ? 'btn-outline-danger' :
+                           ($habitacion->disponibilidad === 'reservada' ? 'btn-outline-warning' : 
+                           'btn-outline-info')) }}" 
+                       title="{{ 
+                           $habitacion->disponibilidad === 'disponible' ? 'Hacer Reserva' :
+                           ($habitacion->disponibilidad === 'ocupada' ? 'Ver Huésped Actual' :
+                           ($habitacion->disponibilidad === 'reservada' ? 'Ver Reserva / Check-in' : 
+                           'En Mantenimiento')) }}">
                         <i class="bi {{ 
                             $habitacion->disponibilidad === 'disponible' ? 'bi-key-fill' :
                             ($habitacion->disponibilidad === 'ocupada' ? 'bi-person-badge' :
@@ -68,6 +64,46 @@
         </div>
         @endforeach
     </div>
+
+    @if($isModalOpen)
+    <div class="modal fade show d-block" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Detalles de la {{ $habitacionSeleccionada->disponibilidad === 'ocupada' ? 'Estadía' : 'Reserva' }}
+                    </h5>
+                    <button type="button" class="btn-close" wire:click="cerrarModal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if($reservaActual)
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Datos de la Habitación</h6>
+                            <p><strong>Número:</strong> {{ $habitacionSeleccionada->numero_habitacion }}</p>
+                            <p><strong>Tipo:</strong> {{ $habitacionSeleccionada->tipoHabitacion->nombre_tipo }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Datos del Huésped</h6>
+                            <p><strong>Nombre:</strong> {{ $reservaActual->huesped->nombre }} {{ $reservaActual->huesped->apellido }}</p>
+                            <p><strong>Check-in:</strong> {{ Carbon\Carbon::parse($reservaActual->check_in)->format('d/m/Y H:i') }}</p>
+                            <p><strong>Check-out:</strong> {{ Carbon\Carbon::parse($reservaActual->check_out)->format('d/m/Y H:i') }}</p>
+                            <p><strong>Noches:</strong> {{ $reservaActual->noches }}</p>
+                            @if($reservaActual->observaciones)
+                                <p><strong>Observaciones:</strong> {{ $reservaActual->observaciones }}</p>
+                            @endif
+                        </div>
+                    @else
+                        <p class="text-center">No se encontraron detalles de la reserva.</p>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" wire:click="cerrarModal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+@endif
 </div>
 
 
