@@ -72,4 +72,10 @@ Route::get('/crear-reserva', function () {
     return view('crear-reserva'); 
 })->name('crear-reserva')->middleware(['auth']);
 
+Route::get('/facturacion/{reserva}', function($reserva) {
+    return view('facturacion', ['reserva' => $reserva]); 
+})
+->name('facturacion')
+->middleware(['auth']);
+
 require __DIR__.'/auth.php';

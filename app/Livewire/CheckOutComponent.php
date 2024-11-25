@@ -51,8 +51,10 @@ class CheckOutComponent extends Component
                 return;
             }
 
+            $reservaId = $this->reservaSeleccionada->id;
+            
             $this->cerrarModal();
-            return redirect()->route('facturacion.crear', ['reserva' => $this->reservaSeleccionada->id]);
+            return redirect()->route('facturacion', ['reserva' => $reservaId]);
 
         } catch (\Exception $e) {
             session()->flash('error', 'Error al procesar el check-out. Por favor, intente nuevamente.');
