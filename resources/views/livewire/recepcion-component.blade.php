@@ -41,16 +41,22 @@
                         style="font-size: 2rem;"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn {{ 
+                    <a href="{{ 
+                        $habitacion->disponibilidad === 'disponible' ? route('crear-reserva') : 
+                        ($habitacion->disponibilidad === 'ocupada' ?  :
+                        ($habitacion->disponibilidad === 'reservada' ?  : 
+                        'javascript:void(0)')) 
+                    }}"
+                    class="btn {{ 
                         $habitacion->disponibilidad === 'disponible' ? 'btn-outline-primary' :
                         ($habitacion->disponibilidad === 'ocupada' ? 'btn-outline-danger' :
                         ($habitacion->disponibilidad === 'reservada' ? 'btn-outline-warning' : 
                         'btn-outline-info')) }}" 
-                        title="{{ 
-                            $habitacion->disponibilidad === 'disponible' ? 'Hacer Reserva' :
-                            ($habitacion->disponibilidad === 'ocupada' ? 'Ver Huésped Actual' :
-                            ($habitacion->disponibilidad === 'reservada' ? 'Ver Reserva / Check-in' : 
-                            'En Mantenimiento')) }}">
+                    title="{{ 
+                        $habitacion->disponibilidad === 'disponible' ? 'Hacer Reserva' :
+                        ($habitacion->disponibilidad === 'ocupada' ? 'Ver Huésped Actual' :
+                        ($habitacion->disponibilidad === 'reservada' ? 'Ver Reserva / Check-in' : 
+                        'En Mantenimiento')) }}">
                         <i class="bi {{ 
                             $habitacion->disponibilidad === 'disponible' ? 'bi-key-fill' :
                             ($habitacion->disponibilidad === 'ocupada' ? 'bi-person-badge' :
