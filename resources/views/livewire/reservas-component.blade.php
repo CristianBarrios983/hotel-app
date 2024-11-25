@@ -1,7 +1,9 @@
 <div class="content p-4">
     <h1 class="text-dark mb-4">Reservas</h1>
     <div class="d-flex justify-content-between align-items-center my-2">
-        <button class="btn btn-primary" wire:click="abrirModalCrear">Nueva Reserva</button>
+        <a href="/crear-reserva" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nueva Reserva
+        </a>
     </div>
 
     @if (session()->has('message'))
@@ -10,11 +12,16 @@
         </div>
     @endif
 
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="table-responsive">
         <table class="table table-hover" id="myTable">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Habitación</th>
                     <th scope="col">Huésped</th>
                     <th scope="col">Fecha Entrada</th>
@@ -26,44 +33,69 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Fila de ejemplo -->
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Habitación 101</td>
-                    <td>Juan Pérez</td>
-                    <td>01/03/2024</td>
-                    <td>03/03/2024</td>
-                    <td><span class="badge bg-success">Confirmada</span></td>
-                    <td>$150.00</td>
-                    <td>28/02/2024</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-warning btn-sm" title="Editar">
-                            <i class="bi bi-pencil-fill"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm" title="Cancelar">
-                            <i class="bi bi-x-circle-fill"></i>
-                        </a>
-                    </td>
-                </tr>
-                <!-- Más filas de ejemplo -->
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Habitación 102</td>
-                    <td>María García</td>
-                    <td>05/03/2024</td>
-                    <td>07/03/2024</td>
-                    <td><span class="badge bg-warning">Pendiente</span></td>
-                    <td>$200.00</td>
-                    <td>01/03/2024</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-warning btn-sm" title="Editar">
-                            <i class="bi bi-pencil-fill"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm" title="Cancelar">
-                            <i class="bi bi-x-circle-fill"></i>
-                        </a>
-                    </td>
-                </tr>
+                @foreach($reservas as $reserva)
+                    <tr>
+                        <td>Habitación {{ $reserva->habitacion->numero_habitacion }}</td>
+                        <td>{{ $reserva->huesped->nombre }} {{ $reserva->huesped->apellido }}</td>
+                        <td>{{ \Carbon\Carbon::parse($reserva->check_in)->format('d/m/Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($reserva->check_out)->format('d/m/Y') }}</td>
+                        <td>
+                            <span class="badge bg-{{ 
+                                $reserva->estado === 'confirmada' ? 'warning' : 
+                                ($reserva->estado === 'pendiente' ? 'secondary' : 
+                                ($reserva->estado === 'no_show' ? 'info' : 
+                                ($reserva->estado === 'check_in' ? 'primary' :
+                                ($reserva->estado === 'check_out' ? 'success' :
+                                ($reserva->estado === 'cancelada' ? 'danger' : 'dark'))))) 
+                            }}">
+                                {{ ucfirst(str_replace('_', ' ', $reserva->estado)) }}
+                            </span>
+                        </td>
+                        <td>${{ number_format($reserva->total, 2) }}</td>
+                        <td>{{ $reserva->created_at->format('d/m/Y') }}</td>
+                        <td class="text-center">
+                            @if($reserva->estado === 'pendiente' || $reserva->estado === 'confirmada')
+                                <!-- Si está pendiente, mostrar botón de confirmar -->
+                                @if($reserva->estado === 'pendiente')
+                                    <a href="#" 
+                                       class="btn btn-success btn-sm" 
+                                       title="Confirmar Reserva"
+                                       wire:click.prevent="confirmarReserva({{ $reserva->id }})">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </a>
+                                @endif
+                                
+                                <!-- Botón de No Show disponible en ambos estados -->
+                                <a href="#" 
+                                   class="btn btn-info btn-sm" 
+                                   title="Marcar No Show"
+                                   wire:click.prevent="marcarNoShow({{ $reserva->id }})">
+                                    <i class="bi bi-person-x-fill"></i>
+                                </a>
+                                
+                                <!-- Resto de botones solo si está pendiente -->
+                                @if($reserva->estado === 'pendiente')
+                                    <a href="#" 
+                                       class="btn btn-warning btn-sm" 
+                                       title="Editar"
+                                       wire:click.prevent="abrirModalEditar({{ $reserva->id }})">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                    <a href="#" 
+                                       class="btn btn-danger btn-sm" 
+                                       title="Cancelar"
+                                       wire:click.prevent="cancelarReserva({{ $reserva->id }})">
+                                        <i class="bi bi-x-circle-fill"></i>
+                                    </a>
+                                @endif
+                            @elseif($reserva->estado === 'no_show')
+                                <span class="text-muted">No se presentó</span>
+                            @else
+                                <span class="text-muted">Reserva cancelada</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
