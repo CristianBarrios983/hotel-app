@@ -33,27 +33,27 @@
                     <td>{{ $mantenimiento->personal }}</td>
                     <td>{{ $mantenimiento->created_at->format('d/m/Y') }}</td>
                     <td>
-                        <span class="badge {{ $mantenimiento->prioridad === 'Alta' ? 'bg-danger' : 
-                            ($mantenimiento->prioridad === 'Media' ? 'bg-warning' : 'bg-info') }}">
-                            {{ $mantenimiento->prioridad }}
+                        <span class="badge {{ $mantenimiento->prioridad === 'alta' ? 'bg-danger' : 
+                            ($mantenimiento->prioridad === 'media' ? 'bg-warning' : 'bg-info') }}">
+                            {{ ucfirst($mantenimiento->prioridad) }}
                         </span>
                     </td>
                     <td>
                         <span class="badge {{ 
-                            $mantenimiento->estado === 'Pendiente' ? 'bg-secondary' : 
-                            ($mantenimiento->estado === 'En Proceso' ? 'bg-primary' : 'bg-success') 
+                            $mantenimiento->estado === 'pendiente' ? 'bg-secondary' : 
+                            ($mantenimiento->estado === 'en_proceso' ? 'bg-primary' : 'bg-success') 
                         }}">
-                            {{ $mantenimiento->estado }}
+                            {{ str_replace('_', ' ', ucfirst($mantenimiento->estado)) }}
                         </span>
                     </td>
                     <td class="text-center">
-                        @if($mantenimiento->estado === 'Pendiente')
+                        @if($mantenimiento->estado === 'pendiente')
                             <button type="button" class="btn btn-sm btn-primary" title="En Proceso" 
-                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'En Proceso')">
+                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'en_proceso')">
                                 <i class="bi bi-gear-fill"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-success" title="Completado" 
-                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'Completado')">
+                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'completado')">
                                 <i class="bi bi-check-circle-fill"></i>
                             </button>
                             <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" 
@@ -64,9 +64,9 @@
                                 wire:click="eliminar({{ $mantenimiento->id }})">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
-                        @elseif($mantenimiento->estado === 'En Proceso')
+                        @elseif($mantenimiento->estado === 'en_proceso')
                             <button type="button" class="btn btn-sm btn-success" title="Completado" 
-                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'Completado')">
+                                wire:click="cambiarEstado({{ $mantenimiento->id }}, 'completado')">
                                 <i class="bi bi-check-circle-fill"></i>
                             </button>
                         @else
@@ -120,9 +120,9 @@
                                         <label for="prioridad" class="form-label">Prioridad</label>
                                         <select class="form-select" wire:model="prioridad">
                                             <option value="">Seleccione prioridad</option>
-                                            <option value="Alta">Alta</option>
-                                            <option value="Media">Media</option>
-                                            <option value="Baja">Baja</option>
+                                            <option value="alta">Alta</option>
+                                            <option value="media">Media</option>
+                                            <option value="baja">Baja</option>
                                         </select>
                                         @error('prioridad') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -187,9 +187,9 @@
                                     <label for="prioridad" class="form-label">Prioridad</label>
                                     <select class="form-select" wire:model="prioridad">
                                         <option value="">Seleccione prioridad</option>
-                                        <option value="Alta">Alta</option>
-                                        <option value="Media">Media</option>
-                                        <option value="Baja">Baja</option>
+                                        <option value="alta">Alta</option>
+                                        <option value="media">Media</option>
+                                        <option value="baja">Baja</option>
                                     </select>
                                     @error('prioridad') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
