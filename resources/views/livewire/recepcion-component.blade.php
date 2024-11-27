@@ -121,7 +121,6 @@
                 habitacion.style.display = "block";
             }else{
                 const estadoHabitacion = habitacion.dataset.estado;
-                //console.log(estadoHabitacion);
                 if(estadoHabitacion !== estado){
                     habitacion.style.display = "none";
                 }
