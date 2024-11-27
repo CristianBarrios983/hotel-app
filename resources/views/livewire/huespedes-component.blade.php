@@ -1,4 +1,3 @@
-<div>
 <div class="content p-4">
             <h1 class="text-dark mb-4">Huespedes</h1>
             <div class="d-flex justify-content-between align-items-center my-2">
@@ -199,4 +198,3 @@
 
         
     </div>
-</div>
