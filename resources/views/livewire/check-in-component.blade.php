@@ -1,5 +1,5 @@
 <div class="content p-4">
-    <h1 class="text-dark mb-4">Check-In</h1>
+    <h1 class="mb-4">Check-In</h1>
 
     <!-- Lista de Llegadas del Día -->
     <div class="card">

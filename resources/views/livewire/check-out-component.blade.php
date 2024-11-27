@@ -1,5 +1,5 @@
 <div class="content p-4">
-    <h1 class="text-dark mb-4">Check-Out</h1>
+    <h1 class="mb-4">Check-Out</h1>
 
     <div class="card">
         <div class="card-header bg-danger text-white">

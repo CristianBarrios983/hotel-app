@@ -2,7 +2,7 @@
 <div class="container my-5">
     <!-- Encabezado de la página -->
     <div class="content p-4">
-        <h1 class="text-dark mb-4 text-center">Recepción - Panel de Habitaciones</h1>
+        <h1 class="mb-4 text-center">Recepción - Panel de Habitaciones</h1>
     </div>
 
     <!-- Filtros de búsqueda -->
