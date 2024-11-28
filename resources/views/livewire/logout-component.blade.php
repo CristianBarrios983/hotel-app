@@ -4,6 +4,6 @@
         wire:click="logout"
         class="dropdown-item w-full text-start"
     >
-        {{ __('Log Out') }}
+        {{ __('Salir') }}
     </button>
 </div>

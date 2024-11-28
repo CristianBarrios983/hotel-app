@@ -93,7 +93,7 @@
             <ul class="dropdown-menu">
                 <li>
                     <a class="dropdown-item" href="{{ route('profile') }}" wire:navigate>
-                        {{ __('Profile') }}
+                        {{ __('Perfil') }}
                     </a>
                 </li>
                 <li>
