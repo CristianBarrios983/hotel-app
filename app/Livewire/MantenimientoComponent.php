@@ -49,7 +49,7 @@ class MantenimientoComponent extends Component
         $this->descripcion = '';
         $this->personal = '';
         $this->prioridad = '';
-        $this->estado = 'Pendiente';
+        $this->estado = 'pendiente';
     }
 
     public function registrarMantenimiento()
@@ -58,7 +58,7 @@ class MantenimientoComponent extends Component
             'habitacion_id' => 'required|exists:habitaciones,id',
             'descripcion' => 'required|string',
             'personal' => 'required|string',
-            'prioridad' => 'required|in:Alta,Media,Baja',
+            'prioridad' => 'required|in:alta,media,baja',
         ]);
 
         // Crear el nuevo mantenimiento en la base de datos
@@ -67,12 +67,12 @@ class MantenimientoComponent extends Component
             'descripcion' => $this->descripcion,
             'personal' => $this->personal,
             'prioridad' => $this->prioridad,
-            'estado' => 'Pendiente',  // Estado por defecto
+            'estado' => 'pendiente',  // Estado por defecto en minúsculas
         ]);
 
         // Actualizar el estado de la habitación a "En Mantenimiento"
         $habitacion = Habitacion::find($this->habitacion_id);
-        $habitacion->update(['disponibilidad' => 'en mantenimiento']);
+        $habitacion->update(['disponibilidad' => 'mantenimiento']);
 
         // Mostrar mensaje de éxito
         session()->flash('message', 'Mantenimiento registrado con éxito.');
@@ -100,8 +100,8 @@ class MantenimientoComponent extends Component
             // Actualiza el estado del mantenimiento
             $mantenimiento->estado = $nuevoEstado;
             
-            // Si el estado es "Completado", actualizar fecha de completado y estado de habitación
-            if ($nuevoEstado === 'Completado') {
+            // Si el estado es "completado", actualizar fecha de completado y estado de habitación
+            if ($nuevoEstado === 'completado') {
                 $mantenimiento->fecha_completado = now();
                 
                 // Si hay una habitación asociada, actualizar su estado
@@ -150,7 +150,7 @@ class MantenimientoComponent extends Component
             'habitacion_id' => 'required|exists:habitaciones,id',
             'descripcion' => 'required|string',
             'personal' => 'required|string',
-            'prioridad' => 'required|in:Alta,Media,Baja',
+            'prioridad' => 'required|in:alta,media,baja',
         ]);
 
         // Actualizar el mantenimiento en la base de datos

@@ -71,11 +71,19 @@
         <li class="nav-item">
           <a class="nav-link" href="/mantenimiento">Mantenimiento</a>
         </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="#">Reportes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/configuracion">Configuracion</a>
+        </li>
+
+        <li class="nav-item">
+                    <div class="form-check form-switch d-flex justify-content-center align-items-center">
+                      <input class="form-check-input me-1 text-white" type="checkbox" role="switch" id="darkModeToggle">
+                      <label class="form-check-label nav-link disabled align-items-center" for="flexSwitchCheckDefault"><i class="fa-solid fa-moon" id="icon"></i></label>
+          </div>
         </li>
 
         <!-- Settings Dropdown -->

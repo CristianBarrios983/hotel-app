@@ -1,5 +1,5 @@
 <div class="content p-4">
-        <h1 class="text-dark mb-4">Bienvenido al Sistema del Hotel</h1>
+        <h1 class="mb-4">Bienvenido al Sistema del Hotel</h1>
         
         <div class="row">
           <div class="col-md-4">

@@ -14,10 +14,9 @@ class Mantenimiento extends Model
     protected $fillable = [
         'habitacion_id',
         'descripcion',
-        'fecha_solicitud',
         'estado',
         'prioridad',
-        'personal_id'
+        'personal'
     ];
 
     // Relación con Habitación

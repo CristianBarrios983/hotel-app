@@ -1,5 +1,5 @@
 <div class="content p-4">
-            <h1 class="text-dark mb-4">Servicios</h1>
+            <h1 class="mb-4">Servicios</h1>
             <div class="d-flex justify-content-between align-items-center my-2">
                 <button class="btn btn-primary" wire:click="abrirModalCrear">Registrar</button>
             </div>
