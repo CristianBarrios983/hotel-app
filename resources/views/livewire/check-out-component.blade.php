@@ -90,9 +90,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click="cerrarModal">Cancelar</button>
-                        <button type="button" class="btn btn-warning" 
-                                wire:click="procederAFacturacion"
-                                @if(!$habitacionVerificada) disabled @endif>
+                        <button type="button" class="btn btn-warning" wire:click="procederAFacturacion">
                             <i class="bi bi-receipt"></i> Proceder a Facturación
                         </button>
                     </div>

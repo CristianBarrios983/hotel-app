@@ -39,11 +39,23 @@ class CheckOutComponent extends Component
 
     public function procederAFacturacion()
     {
-        if (!$this->habitacionVerificada) {
-            session()->flash('error', 'Debe verificar la habitación antes de continuar.');
-            return;
-        }
+        $this->validate([
+            'habitacionVerificada' => 'required|accepted'
+        ], [
+            'habitacionVerificada.accepted' => 'Debe verificar el estado de la habitación antes de continuar.'
+        ]);
 
-        return redirect()->route('facturacion.crear', ['reserva' => $this->reservaSeleccionada->id]);
+        try {
+            if (!$this->reservaSeleccionada) {
+                session()->flash('error', 'Reserva no encontrada.');
+                return;
+            }
+
+            $this->cerrarModal();
+            return redirect()->route('facturacion.crear', ['reserva' => $this->reservaSeleccionada->id]);
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error al procesar el check-out. Por favor, intente nuevamente.');
+        }
     }
 }
