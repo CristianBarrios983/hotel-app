@@ -14,14 +14,14 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Habitaciones
+            Gestión Hotelera
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/habitaciones">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="/habitaciones">Listado de Habitaciones</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/pisos">Pisos</a></li>
+            <li><a class="dropdown-item" href="/pisos">Distribución de Pisos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/tipo_habitaciones">Tipos Habitaciones</a></li>
+            <li><a class="dropdown-item" href="/tipo_habitaciones">Categorías de Habitaciones</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -29,12 +29,12 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Productos
+            Inventario
           </a>
           <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
-          <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/productos">Productos</a></li>
+            <li><a class="dropdown-item" href="/productos">Listado de Productos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/categorias">Categorías</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/proveedores">Proveedores</a></li>
             <li><hr class="dropdown-divider"></li>
@@ -46,22 +46,22 @@
         </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Pedidos
+            Gestión de Pedidos
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/pedidos">Pedidos</a></li>
+            <li><a class="dropdown-item" href="/pedidos">Listado de Pedidos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/crear-pedido">Realizar Pedido</a></li>
+            <li><a class="dropdown-item" href="/crear-pedido">Nuevo Pedido</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reservas
+            Gestión de Reservas
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/recepcion">Recepcion</a></li>
+            <li><a class="dropdown-item" href="/recepcion">Recepción</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/reservas">Reservas</a></li>
+            <li><a class="dropdown-item" href="/reservas">Listado de Reservas</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/check-in">Check In</a></li>
             <li><hr class="dropdown-divider"></li>
