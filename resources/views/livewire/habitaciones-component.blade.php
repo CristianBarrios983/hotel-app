@@ -51,97 +51,95 @@
                                 </a>
                             </td>
                         </tr>
-
-                        @if($isEditModalOpen)
-                            <div class="modal fade show d-block" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Editar Habitación</h5>
-                                            <button type="button" class="btn-close" wire:click="cerrarModalEditar" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <label for="numeroHabitacion" class="form-label">Número Habitación</label>
-                                                    <input type="text" class="form-control" wire:model="numeroHabitacion">
-                                                    @error('numeroHabitacion') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="capacidad" class="form-label">Capacidad</label>
-                                                    <input type="number" class="form-control" wire:model="capacidad">
-                                                    @error('capacidad') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="tamanio" class="form-label">Tamaño (m²)</label>
-                                                    <input type="number" class="form-control" wire:model="tamanio">
-                                                    @error('tamanio') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="vistas" class="form-label">Vistas</label>
-                                                    <input type="text" class="form-control" wire:model="vistas">
-                                                    @error('vistas') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="tipo_cama" class="form-label">Tipo de Cama</label>
-                                                    <select class="form-select" id="tipo_cama" wire:model="tipo_cama">
-                                                        <option value="">Selecciona un tipo de cama</option>
-                                                        <option value="Individual">Individual</option>
-                                                        <option value="Doble">Doble</option>
-                                                        <option value="Queen">Queen</option>
-                                                        <option value="King">King</option>
-                                                    </select>
-                                                    @error('tipo_cama') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="precio" class="form-label">Precio por Noche</label>
-                                                    <input type="number" class="form-control" wire:model="precio">
-                                                    @error('precio') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-
-                                                <!-- Lista desplegable para el Tipo de Habitación -->
-                                                <div class="mb-3">
-                                                    <label for="tipo_habitacion" class="form-label">Tipo de Habitación</label>
-                                                    <select id="tipo_habitacion" class="form-control" wire:model="tipo_habitacion_id">
-                                                        <option value="">Selecciona un tipo de habitación</option>
-                                                        @foreach($tiposHabitacion as $tipo)
-                                                            <option value="{{ $tipo->id }}">{{ $tipo->nombre_tipo }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('tipo_habitacion_id') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-
-                                                <!-- Lista desplegable para el Piso -->
-                                                <div class="mb-3">
-                                                    <label for="piso" class="form-label">Piso</label>
-                                                    <select id="piso" class="form-control" wire:model="piso_id">
-                                                        <option value="">Selecciona un piso</option>
-                                                        @foreach($pisos as $piso)
-                                                            <option value="{{ $piso->id }}">Piso {{ $piso->numero_piso }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('piso_id') <span class="text-danger">{{ $message }}</span> @enderror
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" wire:click="cerrarModalEditar">Cancelar</button>
-                                            <button type="button" class="btn btn-primary" wire:click="actualizar">Actualizar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-backdrop fade show"></div>
-                        @endif
-
-
                     @endforeach
                         <!-- Más filas de muestra -->
                     </tbody>
                 </table>
 
+                <!-- Modal de Editar (fuera del foreach) -->
+                @if($isEditModalOpen)
+                    <div class="modal fade show d-block" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Editar Habitación</h5>
+                                    <button type="button" class="btn-close" wire:click="cerrarModalEditar" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="numeroHabitacion" class="form-label">Número Habitación</label>
+                                            <input type="text" class="form-control" wire:model="numeroHabitacion">
+                                            @error('numeroHabitacion') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="capacidad" class="form-label">Capacidad</label>
+                                            <input type="number" class="form-control" wire:model="capacidad">
+                                            @error('capacidad') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tamanio" class="form-label">Tamaño (m²)</label>
+                                            <input type="number" class="form-control" wire:model="tamanio">
+                                            @error('tamanio') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="vistas" class="form-label">Vistas</label>
+                                            <input type="text" class="form-control" wire:model="vistas">
+                                            @error('vistas') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tipo_cama" class="form-label">Tipo de Cama</label>
+                                            <select class="form-select" id="tipo_cama" wire:model="tipo_cama">
+                                                <option value="">Selecciona un tipo de cama</option>
+                                                <option value="Individual">Individual</option>
+                                                <option value="Doble">Doble</option>
+                                                <option value="Queen">Queen</option>
+                                                <option value="King">King</option>
+                                            </select>
+                                            @error('tipo_cama') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precio" class="form-label">Precio por Noche</label>
+                                            <input type="number" class="form-control" wire:model="precio">
+                                            @error('precio') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
 
-                <!-- Modal para Registrar Habitaciones -->
+                                        <!-- Lista desplegable para el Tipo de Habitación -->
+                                        <div class="mb-3">
+                                            <label for="tipo_habitacion" class="form-label">Tipo de Habitación</label>
+                                            <select id="tipo_habitacion" class="form-control" wire:model="tipo_habitacion_id">
+                                                <option value="">Selecciona un tipo de habitación</option>
+                                                @foreach($tiposHabitacion as $tipo)
+                                                    <option value="{{ $tipo->id }}">{{ $tipo->nombre_tipo }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('tipo_habitacion_id') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+
+                                        <!-- Lista desplegable para el Piso -->
+                                        <div class="mb-3">
+                                            <label for="piso" class="form-label">Piso</label>
+                                            <select id="piso" class="form-control" wire:model="piso_id">
+                                                <option value="">Selecciona un piso</option>
+                                                @foreach($pisos as $piso)
+                                                    <option value="{{ $piso->id }}">Piso {{ $piso->numero_piso }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('piso_id') <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" wire:click="cerrarModalEditar">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" wire:click="actualizar">Actualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-backdrop fade show"></div>
+                @endif
+
+                <!-- Modal de Crear -->
                 @if($isCreateModalOpen)
                     <div class="modal fade show d-block" tabindex="-1">
                         <div class="modal-dialog">
