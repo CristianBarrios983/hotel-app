@@ -120,9 +120,9 @@
                                     {{ $configuracionExistente ? 'Actualizar' : 'Guardar' }} Configuración
                                 </button>
                                 @if($modoEdicion)
-                                    <a href="{{ route('dashboard') }}" class="btn btn-secondary">
+                                    <button type="button" class="btn btn-secondary" wire:click="cancelarEdicion">
                                         Cancelar
-                                    </a>
+                                    </button>
                                 @endif
                             </div>
                         </form>
