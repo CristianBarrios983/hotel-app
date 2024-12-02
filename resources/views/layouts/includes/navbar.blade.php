@@ -79,18 +79,17 @@
           <a class="nav-link" href="/configuracion">Configuracion</a>
         </li>
 
-        <li class="nav-item">
-                    <div class="form-check form-switch d-flex justify-content-center align-items-center">
-                      <input class="form-check-input me-1 text-white" type="checkbox" role="switch" id="darkModeToggle">
-                      <label class="form-check-label nav-link disabled align-items-center" for="flexSwitchCheckDefault"><i class="fa-solid fa-moon" id="icon"></i></label>
-          </div>
-        </li>
-
         <!-- Settings Dropdown -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-info" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name">
             </a>
             <ul class="dropdown-menu">
+              <li class="nav-item">
+                    <div class="form-check form-switch d-flex justify-content-center align-items-center">
+                      <input class="form-check-input me-1 text-white" type="checkbox" role="switch" id="darkModeToggle">
+                      <label class="form-check-label nav-link disabled align-items-center" for="flexSwitchCheckDefault"><i class="bi bi-moon-fill" id="icon"></i></label>
+                  </div>
+              </li>
                 <li>
                     <a class="dropdown-item" href="{{ route('profile') }}" wire:navigate>
                         {{ __('Perfil') }}
