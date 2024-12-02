@@ -24,4 +24,9 @@ class Huesped extends Model
 
     protected $dates = ['fecha_nacimiento', 'created_at', 'updated_at'];
 
+    public function reservas()
+    {
+        return $this->hasMany(Reserva::class);
+    }
+
 }
