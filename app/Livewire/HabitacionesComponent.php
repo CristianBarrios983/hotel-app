@@ -70,6 +70,24 @@ class HabitacionesComponent extends Component
             'precio' => 'required|numeric|min:0',
             'tipo_habitacion_id' => 'required|exists:tipos_habitacion,id',
             'piso_id' => 'required|exists:pisos,id',
+        ], [
+            'numeroHabitacion.required' => 'El número de habitación es obligatorio.',
+            'numeroHabitacion.unique' => 'Este número de habitación ya está en uso.',
+            'capacidad.required' => 'La capacidad es obligatoria.',
+            'capacidad.integer' => 'La capacidad debe ser un número entero.',
+            'capacidad.min' => 'La capacidad debe ser al menos 1.',
+            'tamanio.required' => 'El tamaño es obligatorio.',
+            'tamanio.numeric' => 'El tamaño debe ser un número.',
+            'tamanio.min' => 'El tamaño debe ser mayor a 0.',
+            'tipo_cama.required' => 'El tipo de cama es obligatorio.',
+            'tipo_cama.in' => 'El tipo de cama seleccionado no es válido.',
+            'precio.required' => 'El precio es obligatorio.',
+            'precio.numeric' => 'El precio debe ser un número.',
+            'precio.min' => 'El precio debe ser mayor o igual a 0.',
+            'tipo_habitacion_id.required' => 'El tipo de habitación es obligatorio.',
+            'tipo_habitacion_id.exists' => 'El tipo de habitación seleccionado no es válido.',
+            'piso_id.required' => 'El piso es obligatorio.',
+            'piso_id.exists' => 'El piso seleccionado no es válido.'
         ]);
 
         // Crear la nueva habitación en la base de datos
@@ -131,6 +149,24 @@ class HabitacionesComponent extends Component
             'precio' => 'required|numeric|min:0',
             'tipo_habitacion_id' => 'required|exists:tipos_habitacion,id',
             'piso_id' => 'required|exists:pisos,id',
+        ], [
+            'numeroHabitacion.required' => 'El número de habitación es obligatorio.',
+            'numeroHabitacion.unique' => 'Este número de habitación ya está en uso.',
+            'capacidad.required' => 'La capacidad es obligatoria.',
+            'capacidad.integer' => 'La capacidad debe ser un número entero.',
+            'capacidad.min' => 'La capacidad debe ser al menos 1.',
+            'tamanio.required' => 'El tamaño es obligatorio.',
+            'tamanio.numeric' => 'El tamaño debe ser un número.',
+            'tamanio.min' => 'El tamaño debe ser mayor a 0.',
+            'tipo_cama.required' => 'El tipo de cama es obligatorio.',
+            'tipo_cama.in' => 'El tipo de cama seleccionado no es válido.',
+            'precio.required' => 'El precio es obligatorio.',
+            'precio.numeric' => 'El precio debe ser un número.',
+            'precio.min' => 'El precio debe ser mayor o igual a 0.',
+            'tipo_habitacion_id.required' => 'El tipo de habitación es obligatorio.',
+            'tipo_habitacion_id.exists' => 'El tipo de habitación seleccionado no es válido.',
+            'piso_id.required' => 'El piso es obligatorio.',
+            'piso_id.exists' => 'El piso seleccionado no es válido.'
         ]);
 
         // Actualizar la habitación en la base de datos
