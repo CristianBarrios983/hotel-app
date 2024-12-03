@@ -56,6 +56,30 @@ class HuespedesComponent extends Component
             'numero_documento' => 'required|string|unique:huespedes,numero_documento|max:50',
             'email' => 'required|email|unique:huespedes,email|max:255',
             'telefono' => 'nullable|string|max:20',
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser texto.',
+            'nombre.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'apellido.required' => 'El apellido es obligatorio.',
+            'apellido.string' => 'El apellido debe ser texto.',
+            'apellido.max' => 'El apellido no puede tener más de 255 caracteres.',
+            'fecha_nacimiento.required' => 'La fecha de nacimiento es obligatoria.',
+            'fecha_nacimiento.date' => 'La fecha de nacimiento no es válida.',
+            'fecha_nacimiento.before' => 'La fecha de nacimiento debe ser anterior a hoy.',
+            'nacionalidad.string' => 'La nacionalidad debe ser texto.',
+            'nacionalidad.max' => 'La nacionalidad no puede tener más de 100 caracteres.',
+            'tipo_documento.required' => 'El tipo de documento es obligatorio.',
+            'tipo_documento.in' => 'El tipo de documento seleccionado no es válido.',
+            'numero_documento.required' => 'El número de documento es obligatorio.',
+            'numero_documento.string' => 'El número de documento debe ser texto.',
+            'numero_documento.unique' => 'El número de documento ya está en uso.',
+            'numero_documento.max' => 'El número de documento no puede tener más de 50 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'email.unique' => 'El correo electrónico ya está en uso.',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres.',
+            'telefono.string' => 'El teléfono debe ser texto.',
+            'telefono.max' => 'El teléfono no puede tener más de 20 caracteres.'
         ]);
         
         Huesped::create([
@@ -105,7 +129,6 @@ class HuespedesComponent extends Component
 
     public function actualizar()
     {
-        // Validación
         $this->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
@@ -115,6 +138,30 @@ class HuespedesComponent extends Component
             'numero_documento' => 'required|string|unique:huespedes,numero_documento,' . $this->huespedId . ',id|max:50',
             'email' => 'required|email|unique:huespedes,email,' . $this->huespedId . ',id|max:255',
             'telefono' => 'nullable|string|max:20',
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser texto.',
+            'nombre.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'apellido.required' => 'El apellido es obligatorio.',
+            'apellido.string' => 'El apellido debe ser texto.',
+            'apellido.max' => 'El apellido no puede tener más de 255 caracteres.',
+            'fecha_nacimiento.required' => 'La fecha de nacimiento es obligatoria.',
+            'fecha_nacimiento.date' => 'La fecha de nacimiento no es válida.',
+            'fecha_nacimiento.before' => 'La fecha de nacimiento debe ser anterior a hoy.',
+            'nacionalidad.string' => 'La nacionalidad debe ser texto.',
+            'nacionalidad.max' => 'La nacionalidad no puede tener más de 100 caracteres.',
+            'tipo_documento.required' => 'El tipo de documento es obligatorio.',
+            'tipo_documento.in' => 'El tipo de documento seleccionado no es válido.',
+            'numero_documento.required' => 'El número de documento es obligatorio.',
+            'numero_documento.string' => 'El número de documento debe ser texto.',
+            'numero_documento.unique' => 'El número de documento ya está en uso.',
+            'numero_documento.max' => 'El número de documento no puede tener más de 50 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'email.unique' => 'El correo electrónico ya está en uso.',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres.',
+            'telefono.string' => 'El teléfono debe ser texto.',
+            'telefono.max' => 'El teléfono no puede tener más de 20 caracteres.'
         ]);
 
         // Actualizar el registro del huesped en la base de datos

@@ -71,10 +71,20 @@ class PedidosComponent extends Component
     public function registrarPedido()
     {
         $this->validate([
-            'proveedorSeleccionado' => 'required|exists:proveedores,id', // El proveedor debe ser válido
-            'productosSeleccionados' => 'required|array|min:1', // Debe haber al menos un producto seleccionado
-            'productosSeleccionados.*.id' => 'exists:productos,id', // Cada producto debe existir en la base de datos
-            'productosSeleccionados.*.cantidad' => 'required|integer|min:1', // Cada producto debe tener una cantidad válida
+            'proveedorSeleccionado' => 'required|exists:proveedores,id',
+            'productosSeleccionados' => 'required|array|min:1',
+            'productosSeleccionados.*.id' => 'exists:productos,id',
+            'productosSeleccionados.*.cantidad' => 'required|integer|min:1',
+        ], [
+            'proveedorSeleccionado.required' => 'Debe seleccionar un proveedor.',
+            'proveedorSeleccionado.exists' => 'El proveedor seleccionado no es válido.',
+            'productosSeleccionados.required' => 'Debe seleccionar al menos un producto.',
+            'productosSeleccionados.array' => 'Los productos seleccionados deben ser un arreglo.',
+            'productosSeleccionados.min' => 'Debe seleccionar al menos un producto.',
+            'productosSeleccionados.*.id.exists' => 'El producto seleccionado no es válido.',
+            'productosSeleccionados.*.cantidad.required' => 'La cantidad es obligatoria para cada producto.',
+            'productosSeleccionados.*.cantidad.integer' => 'La cantidad debe ser un número entero.',
+            'productosSeleccionados.*.cantidad.min' => 'La cantidad debe ser al menos 1.'
         ]);
 
         try {

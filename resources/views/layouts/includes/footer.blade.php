@@ -46,14 +46,14 @@ document.addEventListener('DOMContentLoaded', function () {
     darkModeToggle.addEventListener('change', function () {
       if (darkModeToggle.checked) {
         body.setAttribute('data-bs-theme', 'dark');
-        icon.classList.remove('fa-solid','fa-moon');
-        icon.classList.add('fa-solid','fa-sun'); // Cambia la clase del icono al modo oscuro
+        icon.classList.remove('bi','bi-moon-fill');
+        icon.classList.add('bi','bi-sun-fill'); // Cambia la clase del icono al modo oscuro
         // Guarda el modo oscuro en el localStorage
         localStorage.setItem('mode', 'dark');
       } else {
         body.setAttribute('data-bs-theme', 'light');
-        icon.classList.remove('fa-solid','fa-sun');
-        icon.classList.add('fa-solid','fa-moon'); // Cambia la clase del icono al modo claro
+        icon.classList.remove('bi','bi-sun-fill');
+        icon.classList.add('bi','bi-moon-fill'); // Cambia la clase del icono al modo claro
         // Guarda el modo claro en el localStorage
         localStorage.setItem('mode', 'light');
       }
@@ -62,10 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if(localStorage.getItem('mode') === 'dark'){
       darkModeToggle.checked = true;
       body.setAttribute('data-bs-theme', 'dark');
-      icon.classList.add('fa-solid','fa-sun');
+      icon.classList.add('bi','bi-sun-fill');
     }else{
       body.setAttribute('data-bs-theme', 'light');
-      icon.classList.add('fa-solid','fa-moon');
+      icon.classList.add('bi','bi-moon-fill');
     }
 });
   
