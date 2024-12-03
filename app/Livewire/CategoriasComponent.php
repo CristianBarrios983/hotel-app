@@ -44,6 +44,11 @@ class CategoriasComponent extends Component
         $this->validate([
             'nombreCategoria' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
+        ], [
+            'nombreCategoria.required' => 'El nombre de la categoría es obligatorio.',
+            'nombreCategoria.string' => 'El nombre debe ser texto.',
+            'nombreCategoria.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.'
         ]);
         
         Categorias::create([
@@ -84,6 +89,11 @@ class CategoriasComponent extends Component
         $this->validate([
             'nombreCategoria' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
+        ], [
+            'nombreCategoria.required' => 'El nombre de la categoría es obligatorio.',
+            'nombreCategoria.string' => 'El nombre debe ser texto.',
+            'nombreCategoria.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.'
         ]);
 
         Categorias::find($this->categoriaId)->update([

@@ -46,8 +46,19 @@ class ServiciosComponent extends Component
             'descripcion' => 'nullable|string|max:255',
             'precio' => 'required|numeric|min:0',      
             'disponibilidad' => 'required|boolean',     
-        ]);        
-        
+        ], [
+            'nombre.required' => 'El nombre del servicio es obligatorio.',
+            'nombre.string' => 'El nombre debe ser texto.',
+            'nombre.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'descripcion.max' => 'La descripción no puede tener más de 255 caracteres.',
+            'precio.required' => 'El precio es obligatorio.',
+            'precio.numeric' => 'El precio debe ser un número.',
+            'precio.min' => 'El precio debe ser mayor o igual a 0.',
+            'disponibilidad.required' => 'La disponibilidad es obligatoria.',
+            'disponibilidad.boolean' => 'La disponibilidad debe ser verdadero o falso.'
+        ]);
+
         Servicios::create([
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
@@ -86,13 +97,23 @@ class ServiciosComponent extends Component
 
     public function actualizar()
     {
-        // Validación
         $this->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string|max:255',
             'precio' => 'required|numeric|min:0',      
             'disponibilidad' => 'required|boolean',     
-        ]); 
+        ], [
+            'nombre.required' => 'El nombre del servicio es obligatorio.',
+            'nombre.string' => 'El nombre debe ser texto.',
+            'nombre.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'descripcion.max' => 'La descripción no puede tener más de 255 caracteres.',
+            'precio.required' => 'El precio es obligatorio.',
+            'precio.numeric' => 'El precio debe ser un número.',
+            'precio.min' => 'El precio debe ser mayor o igual a 0.',
+            'disponibilidad.required' => 'La disponibilidad es obligatoria.',
+            'disponibilidad.boolean' => 'La disponibilidad debe ser verdadero o falso.'
+        ]);
 
         // Actualizar el registro del servicio en la base de datos
         $servicio = Servicios::find($this->servicioId);

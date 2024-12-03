@@ -59,6 +59,15 @@ class MantenimientoComponent extends Component
             'descripcion' => 'required|string',
             'personal' => 'required|string',
             'prioridad' => 'required|in:alta,media,baja',
+        ], [
+            'habitacion_id.required' => 'Debe seleccionar una habitación.',
+            'habitacion_id.exists' => 'La habitación seleccionada no es válida.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'personal.required' => 'El personal es obligatorio.',
+            'personal.string' => 'El personal debe ser texto.',
+            'prioridad.required' => 'La prioridad es obligatoria.',
+            'prioridad.in' => 'La prioridad debe ser alta, media o baja.'
         ]);
 
         // Crear el nuevo mantenimiento en la base de datos
@@ -151,6 +160,15 @@ class MantenimientoComponent extends Component
             'descripcion' => 'required|string',
             'personal' => 'required|string',
             'prioridad' => 'required|in:alta,media,baja',
+        ], [
+            'habitacion_id.required' => 'Debe seleccionar una habitación.',
+            'habitacion_id.exists' => 'La habitación seleccionada no es válida.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'personal.required' => 'El personal es obligatorio.',
+            'personal.string' => 'El personal debe ser texto.',
+            'prioridad.required' => 'La prioridad es obligatoria.',
+            'prioridad.in' => 'La prioridad debe ser alta, media o baja.'
         ]);
 
         // Actualizar el mantenimiento en la base de datos
