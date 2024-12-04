@@ -73,7 +73,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="#">Reportes</a>
+          <a class="nav-link" href="/reportes">Reportes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/configuracion">Configuracion</a>
