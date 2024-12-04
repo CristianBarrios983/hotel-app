@@ -68,6 +68,11 @@ class TipoHabitacionComponent extends Component
         $this->validate([
             'nombreTipo' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
+        ], [
+            'nombreTipo.required' => 'El nombre del tipo de habitación es obligatorio.',
+            'nombreTipo.string' => 'El nombre debe ser texto.',
+            'nombreTipo.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.'
         ]);
 
         TipoHabitacion::create([
@@ -85,6 +90,11 @@ class TipoHabitacionComponent extends Component
         $this->validate([
             'nombreTipo' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
+        ], [
+            'nombreTipo.required' => 'El nombre del tipo de habitación es obligatorio.',
+            'nombreTipo.string' => 'El nombre debe ser texto.',
+            'nombreTipo.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.'
         ]);
 
         TipoHabitacion::find($this->tipoId)->update([

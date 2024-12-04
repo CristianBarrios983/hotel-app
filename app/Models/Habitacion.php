@@ -23,6 +23,11 @@ class Habitacion extends Model
         'piso_id',
     ];
 
+    public function tipoHabitacion()
+    {
+        return $this->belongsTo(TipoHabitacion::class);
+    }
+
     // Relación con la tabla pisos
     public function pisos()
     {

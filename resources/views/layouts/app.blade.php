@@ -6,7 +6,7 @@
 
     @livewireStyles <!-- Estilos de Livewire -->
 </head>
-<body>
+<body data-bs-theme="dark">
     @include('layouts.includes.navbar')  <!-- Incluye el archivo navbar -->
 
     <div class="container">

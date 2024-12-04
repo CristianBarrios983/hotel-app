@@ -44,6 +44,10 @@ Route::get('/proveedores', function () {
     return view('proveedores'); 
 })->name('proveedores')->middleware(['auth']);
 
+Route::get('/productos', function () {
+    return view('productos'); 
+})->name('productos')->middleware(['auth']);
+
 Route::get('/categorias', function () {
     return view('categorias'); 
 })->name('categorias')->middleware(['auth']);
@@ -55,5 +59,42 @@ Route::get('/servicios', function () {
 Route::get('/pedidos', function () {
     return view('pedidos'); 
 })->name('pedidos')->middleware(['auth']);
+
+Route::get('/recepcion', function () {
+    return view('recepcion'); 
+})->name('recepcion')->middleware(['auth']);
+
+Route::get('/mantenimiento', function () {
+    return view('mantenimiento'); 
+})->name('mantenimiento')->middleware(['auth']);
+
+Route::get('/configuracion', function () {
+    return view('configuracion'); 
+})->name('configuracion')->middleware(['auth']);
+
+Route::get('/mantenimiento', function () {
+    return view('mantenimiento'); 
+})->name('mantenimiento')->middleware(['auth']);
+Route::get('/reservas', function () {
+    return view('reservas'); 
+})->name('reservas')->middleware(['auth']);
+
+Route::get('/check-in', function () {
+    return view('check-in'); 
+})->name('check-in')->middleware(['auth']);
+
+Route::get('/check-out', function () {
+    return view('check-out'); 
+})->name('check-out')->middleware(['auth']);
+
+Route::get('/crear-reserva', function () {
+    return view('crear-reserva'); 
+})->name('crear-reserva')->middleware(['auth']);
+
+Route::get('/facturacion/{reserva}', function($reserva) {
+    return view('facturacion', ['reserva' => $reserva]); 
+})
+->name('facturacion')
+->middleware(['auth']);
 
 require __DIR__.'/auth.php';

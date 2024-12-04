@@ -22,7 +22,8 @@ class ProveedoresComponent extends Component
 
     public function render()
     {
-        $this->proveedores = Proveedores::all();
+        // $this->proveedores = Proveedores::all();
+        $this->proveedores = Proveedores::with('categoria')->get();
         return view('livewire.proveedores-component')->layout('layouts.app');
     }
 
@@ -59,7 +60,25 @@ class ProveedoresComponent extends Component
             'direccion' => 'required|string|max:255',
             'descripcion' => 'nullable|string|max:255',
             'categoria_id' => 'required|exists:categorias,id',
-        ]);                
+        ], [
+            'nombreProveedor.required' => 'El nombre del proveedor es obligatorio.',
+            'nombreProveedor.string' => 'El nombre debe ser texto.',
+            'nombreProveedor.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'telefono.required' => 'El teléfono es obligatorio.',
+            'telefono.string' => 'El teléfono debe ser texto.',
+            'telefono.max' => 'El teléfono no puede tener más de 15 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'email.unique' => 'Este correo electrónico ya está registrado.',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres.',
+            'direccion.required' => 'La dirección es obligatoria.',
+            'direccion.string' => 'La dirección debe ser texto.',
+            'direccion.max' => 'La dirección no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'descripcion.max' => 'La descripción no puede tener más de 255 caracteres.',
+            'categoria_id.required' => 'La categoría es obligatoria.',
+            'categoria_id.exists' => 'La categoría seleccionada no es válida.'
+        ]);
 
         // Crear la nueva habitación en la base de datos
         Proveedores::create([
@@ -115,6 +134,24 @@ class ProveedoresComponent extends Component
             'direccion' => 'required|string|max:255',
             'descripcion' => 'nullable|string|max:255',
             'categoria_id' => 'required|exists:categorias,id',
+        ], [
+            'nombreProveedor.required' => 'El nombre del proveedor es obligatorio.',
+            'nombreProveedor.string' => 'El nombre debe ser texto.',
+            'nombreProveedor.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'telefono.required' => 'El teléfono es obligatorio.',
+            'telefono.string' => 'El teléfono debe ser texto.',
+            'telefono.max' => 'El teléfono no puede tener más de 15 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'email.unique' => 'Este correo electrónico ya está registrado.',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres.',
+            'direccion.required' => 'La dirección es obligatoria.',
+            'direccion.string' => 'La dirección debe ser texto.',
+            'direccion.max' => 'La dirección no puede tener más de 255 caracteres.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'descripcion.max' => 'La descripción no puede tener más de 255 caracteres.',
+            'categoria_id.required' => 'La categoría es obligatoria.',
+            'categoria_id.exists' => 'La categoría seleccionada no es válida.'
         ]);
                 
 

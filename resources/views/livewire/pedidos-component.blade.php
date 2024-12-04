@@ -56,7 +56,7 @@
 
         <!-- Tabla con botón para Ver Detalles -->
         <div class="content p-4">
-            <h1 class="text-dark mb-4">Pedidos</h1>
+            <h1 class="mb-4">Pedidos</h1>
             <div class="d-flex justify-content-between align-items-center my-2">
                 <!-- <button class="btn btn-primary">Registrar</button> -->
                 <a href="#" class="btn btn-primary" wire:click="cambiarVista('create')">Crear Pedido</a>
@@ -145,7 +145,7 @@
         </style>
 
         <div class="content p-4">
-            <h1 class="text-dark mb-4">Realizar Pedido</h1>
+            <h1 class="mb-4">Realizar Pedido</h1>
 
             <!-- Mensajes -->
             @if (session()->has('message'))

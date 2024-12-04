@@ -23,7 +23,23 @@ class ProductosComponent extends Component
 
     public function render()
     {
-        $this->productos = Productos::all();
+        // $this->productos = Productos::all();
+        // $this->productos = Productos::join('categorias', 'categorias.id', '=', 'productos.categoria_id')
+        // ->select(
+        //     'productos.id', 
+        //     'productos.nombre as producto_nombre', 
+        //     'productos.descripcion', 
+        //     'productos.precio', 
+        //     'productos.stock', 
+        //     'productos.stock_minimo', 
+        //     'productos.created_at', 
+        //     'categorias.nombre_categoria as categoria'
+        // )
+        // ->get();
+
+
+        // Cargar los productos con sus categorías
+        $this->productos = Productos::with('categoria')->get();
         return view('livewire.productos-component')->layout('layouts.app');
     }
 
@@ -60,7 +76,22 @@ class ProductosComponent extends Component
             'stock' => 'required|numeric|min:0',
             'stockMinimo' => 'required|numeric|min:0',
             'categoria_id' => 'required|exists:categorias,id',
-        ]);        
+        ], [
+            'nombreProducto.required' => 'El nombre del producto es obligatorio.',
+            'nombreProducto.string' => 'El nombre debe ser texto.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'precio.required' => 'El precio es obligatorio.',
+            'precio.numeric' => 'El precio debe ser un número.',
+            'precio.min' => 'El precio debe ser mayor o igual a 0.',
+            'stock.required' => 'El stock es obligatorio.',
+            'stock.numeric' => 'El stock debe ser un número.',
+            'stock.min' => 'El stock debe ser mayor o igual a 0.',
+            'stockMinimo.required' => 'El stock mínimo es obligatorio.',
+            'stockMinimo.numeric' => 'El stock mínimo debe ser un número.',
+            'stockMinimo.min' => 'El stock mínimo debe ser mayor o igual a 0.',
+            'categoria_id.required' => 'La categoría es obligatoria.',
+            'categoria_id.exists' => 'La categoría seleccionada no es válida.'
+        ]);
         
         Productos::create([
             'nombre' => $this->nombreProducto,
@@ -112,7 +143,22 @@ class ProductosComponent extends Component
             'stock' => 'required|numeric|min:0',
             'stockMinimo' => 'required|numeric|min:0',
             'categoria_id' => 'required|exists:categorias,id',
-        ]);      
+        ], [
+            'nombreProducto.required' => 'El nombre del producto es obligatorio.',
+            'nombreProducto.string' => 'El nombre debe ser texto.',
+            'descripcion.string' => 'La descripción debe ser texto.',
+            'precio.required' => 'El precio es obligatorio.',
+            'precio.numeric' => 'El precio debe ser un número.',
+            'precio.min' => 'El precio debe ser mayor o igual a 0.',
+            'stock.required' => 'El stock es obligatorio.',
+            'stock.numeric' => 'El stock debe ser un número.',
+            'stock.min' => 'El stock debe ser mayor o igual a 0.',
+            'stockMinimo.required' => 'El stock mínimo es obligatorio.',
+            'stockMinimo.numeric' => 'El stock mínimo debe ser un número.',
+            'stockMinimo.min' => 'El stock mínimo debe ser mayor o igual a 0.',
+            'categoria_id.required' => 'La categoría es obligatoria.',
+            'categoria_id.exists' => 'La categoría seleccionada no es válida.'
+        ]);
 
         Productos::find($this->productoId)->update([
             'nombre' => $this->nombreProducto,

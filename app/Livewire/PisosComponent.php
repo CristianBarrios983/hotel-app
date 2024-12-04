@@ -43,6 +43,10 @@ class PisosComponent extends Component
         $this->validate([
             'numeroPiso' => 'required|integer',
             'descripcion' => 'nullable|string',
+        ], [
+            'numeroPiso.required' => 'El número de piso es obligatorio.',
+            'numeroPiso.integer' => 'El número de piso debe ser un número entero.',
+            'descripcion.string' => 'La descripción debe ser texto.'
         ]);
         
         Piso::create([
@@ -83,6 +87,10 @@ class PisosComponent extends Component
         $this->validate([
             'numeroPiso' => 'required|integer',
             'descripcion' => 'nullable|string',
+        ], [
+            'numeroPiso.required' => 'El número de piso es obligatorio.',
+            'numeroPiso.integer' => 'El número de piso debe ser un número entero.',
+            'descripcion.string' => 'La descripción debe ser texto.'
         ]);        
 
         Piso::find($this->pisoId)->update([
