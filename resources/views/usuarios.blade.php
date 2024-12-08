@@ -1,5 +1,5 @@
-@extends('layouts.app') <!-- Asegúrate de que esta sea tu plantilla base -->
+@extends('layouts.app') 
 
 @section('content')
-    @livewire('user-component') <!-- Aquí se incluye tu componente Livewire -->
+    @livewire('user-component') 
 @endsection
