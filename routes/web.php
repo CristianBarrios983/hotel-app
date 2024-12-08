@@ -105,4 +105,8 @@ Route::get('/reportes', function () {
     return view('reportes'); 
 })->name('reportes')->middleware(['auth']);
 
+Route::get('/perfil', function () {
+    return view('perfil'); 
+})->name('perfil')->middleware(['auth']);
+
 require __DIR__.'/auth.php';
