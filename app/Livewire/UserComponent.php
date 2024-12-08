@@ -112,5 +112,44 @@ class UserComponent extends Component
         session()->flash('message', 'Usuario eliminado con éxito.');
     }
 
+    public function actualizar()
+    {
+        $this->validate([
+            'nombre' => 'required|string|max:255',
+            'correo' => 'required|email',
+            'telefono' => 'nullable|string|max:15',
+            'direccion' => 'nullable|string|max:255',
+            'contrasena' => 'nullable|string|min:8|confirmed', // La contraseña es opcional
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser texto.',
+            'nombre.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'correo.required' => 'El correo electrónico es obligatorio.',
+            'correo.email' => 'El correo electrónico debe ser una dirección válida.',
+            'telefono.string' => 'El teléfono debe ser texto.',
+            'telefono.max' => 'El teléfono no puede tener más de 15 caracteres.',
+            'direccion.string' => 'La dirección debe ser texto.',
+            'direccion.max' => 'La dirección no puede tener más de 255 caracteres.',
+            'contrasena.string' => 'La contraseña debe ser texto.',
+            'contrasena.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'contrasena.confirmed' => 'Las contraseñas no coinciden.',
+        ]);
 
+        $usuario = User::find($this->usuarioId);
+
+        $usuario->name = $this->nombre;
+        $usuario->email = $this->correo;
+        $usuario->phone = $this->telefono;
+        $usuario->address = $this->direccion;
+
+        // Solo actualizar la contraseña si se proporciona una nueva
+        if ($this->contrasena) {
+            $usuario->password = Hash::make($this->contrasena);
+        }
+
+        $usuario->save();
+
+        session()->flash('message', 'Usuario actualizado con éxito.');
+        $this->cerrarModalEditar();
+    }
 }
