@@ -73,7 +73,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="#">Reportes</a>
+          <a class="nav-link" href="/reportes">Reportes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/configuracion">Configuracion</a>
@@ -91,7 +91,7 @@
                   </div>
               </li>
                 <li>
-                    <a class="dropdown-item" href="{{ route('profile') }}" wire:navigate>
+                    <a class="dropdown-item" href="{{ route('perfil') }}" wire:navigate>
                         {{ __('Perfil') }}
                     </a>
                 </li>
