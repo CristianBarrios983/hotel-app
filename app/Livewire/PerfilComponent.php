@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PerfilComponent extends Component
 {
@@ -12,6 +13,8 @@ class PerfilComponent extends Component
     public $correo;
     public $telefono;
     public $direccion;
+
+    public $contrasena, $contrasena_confirmation;
 
     public function mount()
     {
@@ -53,5 +56,23 @@ class PerfilComponent extends Component
     public function render()
     {
         return view('livewire.perfil-component');
+    }
+
+    public function cambiarContrasena()
+    {
+        $this->validate([
+            'contrasena' => 'required|string|min:8|confirmed',
+        ], [
+            'contrasena.required' => 'La contraseña es obligatoria.',
+            'contrasena.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'contrasena.confirmed' => 'Las contraseñas no coinciden.',
+        ]);
+
+        $user = auth()->user(); // O el usuario que estés editando
+        $user->password = Hash::make($this->contrasena);
+        $user->save();
+
+        session()->flash('message', 'Contraseña cambiada con éxito.');
+        $this->reset(['contrasena', 'contrasena_confirmation']); // Resetear campos
     }
 }

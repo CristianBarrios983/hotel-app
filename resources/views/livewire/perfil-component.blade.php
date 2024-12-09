@@ -45,6 +45,24 @@
                             <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
                         </div>
                     </form>
+
+                    <!-- Sección para Cambiar Contraseña -->
+                    <hr class="my-4">
+                    <h5 class="text-center">Cambiar Contraseña</h5>
+                    <form wire:submit.prevent="cambiarContrasena">
+                        <div class="mb-3">
+                            <label for="contrasena" class="form-label">Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="contrasena" wire:model="contrasena">
+                            @error('contrasena') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="contrasena_confirmation" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="contrasena_confirmation" wire:model="contrasena_confirmation">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning">Cambiar Contraseña</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
