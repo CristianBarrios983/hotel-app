@@ -1,12 +1,12 @@
 <div class="container my-5">
     <!-- Filtros Generales -->
-    <div class="row mb-4">
+    <!-- <div class="row mb-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="mb-3">Filtros</h5>
                     <div class="row g-3">
-                        <!-- Rango de Fechas -->
+                       
                         <div class="col-md-4">
                             <label class="form-label">Rango de Fechas</label>
                             <div class="input-group">
@@ -16,7 +16,7 @@
                             </div>
                         </div>
 
-                        <!-- Filtro Rápido de Período -->
+                        
                         <div class="col-md-2">
                             <label class="form-label">Período</label>
                             <select class="form-select" wire:model="periodo">
@@ -27,7 +27,7 @@
                             </select>
                         </div>
 
-                        <!-- Tipo de Habitación -->
+                        
                         <div class="col-md-2">
                             <label class="form-label">Tipo Habitación</label>
                             <select class="form-select" wire:model="tipoHabitacion">
@@ -38,7 +38,7 @@
                             </select>
                         </div>
 
-                        <!-- Tipo de Servicio -->
+                        
                         <div class="col-md-2">
                             <label class="form-label">Servicios</label>
                             <select class="form-select" wire:model="tipoServicio">
@@ -49,7 +49,7 @@
                             </select>
                         </div>
 
-                        <!-- Botón de Aplicar Filtros -->
+                        
                         <div class="col-md-2 d-flex align-items-end">
                             <button class="btn btn-primary w-100" wire:click="aplicarFiltros">
                                 Aplicar Filtros
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Reportes de Ocupación -->
     <div class="row mb-4">
