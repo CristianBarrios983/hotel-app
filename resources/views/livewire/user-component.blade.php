@@ -31,7 +31,13 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->address }}</td>
-                            <td class="text-success">Sin Rol</td>
+                            <td class="text-success text-capitalize">
+                                @if($user->getRoleNames()->isNotEmpty())
+                                    {{ $user->getRoleNames()->implode(', ') }}
+                                @else
+                                    Sin Rol
+                                @endif
+                            </td>
                             <td>{{ $user->created_at->format('d/m/Y') }}</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-warning btn-sm" title="Editar" data-bs-toggle="modal" wire:click="abrirModalEditar({{ $user->id }})">
@@ -77,13 +83,13 @@
                                             <input type="text" class="form-control" wire:model="direccion">
                                             @error('direccion') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
-                                        <!-- Lista desplegable para rol (comentada para implementación futura) -->
+                                        <!-- Lista desplegable para rol -->
                                         <div class="mb-3">
                                             <label for="rol" class="form-label">Rol</label>
                                             <select class="form-select" wire:model="rol">
                                                 <option value="">Seleccionar rol</option>
                                                 <option value="admin">Administrador</option>
-                                                <option value="recepcionista">Recepcionista</option>
+                                                <option value="recepcion">Recepcionista</option>
                                                 <option value="mantenimiento">Mantenimiento</option>
                                             </select>
                                             @error('rol') <span class="text-danger">{{ $message }}</span> @enderror
@@ -140,13 +146,13 @@
                                             <input type="text" class="form-control" wire:model="direccion">
                                             @error('direccion') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
-                                        <!-- Lista desplegable para rol (comentada para implementación futura) -->
+                                        <!-- Lista desplegable para rol -->
                                         <div class="mb-3">
                                             <label for="rol" class="form-label">Rol</label>
                                             <select class="form-select" wire:model="rol">
                                                 <option value="">Seleccionar rol</option>
                                                 <option value="admin">Administrador</option>
-                                                <option value="recepcionista">Recepcionista</option>
+                                                <option value="recepcion">Recepcionista</option>
                                                 <option value="mantenimiento">Mantenimiento</option>
                                             </select>
                                             @error('rol') <span class="text-danger">{{ $message }}</span> @enderror
