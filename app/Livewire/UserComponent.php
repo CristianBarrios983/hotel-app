@@ -16,7 +16,7 @@ class UserComponent extends Component
 
     public function render()
     {
-        $this->users = User::all(); // Carga todos los usuarios
+        $this->users = User::with('roles')->get(); // Carga todos los usuarios con sus roles
         return view('livewire.user-component')->layout('layouts.app');
     }
 
@@ -67,6 +67,9 @@ class UserComponent extends Component
         $this->correo = $usuario->email;
         $this->telefono = $usuario->phone;
         $this->direccion = $usuario->address;
+
+        // Obtener el primer rol asignado al usuario
+        $this->rol = $usuario->getRoleNames()->first(); // Asigna el primer rol a la propiedad
     }
 
     public function almacenar()
@@ -77,6 +80,7 @@ class UserComponent extends Component
             'telefono' => 'nullable|string|max:15',
             'direccion' => 'nullable|string|max:255',
             'contrasena' => 'required|string|min:8|confirmed',
+            'rol' => 'required|in:admin,recepcion,mantenimiento', // Valida que el rol sea uno de los permitidos
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser texto.',
@@ -92,15 +96,21 @@ class UserComponent extends Component
             'contrasena.string' => 'La contraseña debe ser texto.',
             'contrasena.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'contrasena.confirmed' => 'Las contraseñas no coinciden.',
+            'rol.required' => 'El rol es obligatorio.',
+            'rol.in' => 'El rol seleccionado no es válido.',
         ]);
 
-        User::create([
+        // Crear el usuario
+        $user = User::create([
             'name' => $this->nombre,
             'email' => $this->correo,
             'phone' => $this->telefono,
             'address' => $this->direccion,
             'password' => Hash::make($this->contrasena), // Asegúrate de hashear la contraseña
         ]);
+
+        // Asignar el rol al usuario
+        $user->assignRole($this->rol);
 
         session()->flash('message', 'Usuario creado con éxito.');
         $this->cerrarModalCrear();
@@ -120,6 +130,7 @@ class UserComponent extends Component
             'telefono' => 'nullable|string|max:15',
             'direccion' => 'nullable|string|max:255',
             'contrasena' => 'nullable|string|min:8|confirmed', // La contraseña es opcional
+            'rol' => 'required|in:admin,recepcion,mantenimiento', // Valida que el rol sea uno de los permitidos
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser texto.',
@@ -133,6 +144,8 @@ class UserComponent extends Component
             'contrasena.string' => 'La contraseña debe ser texto.',
             'contrasena.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'contrasena.confirmed' => 'Las contraseñas no coinciden.',
+            'rol.required' => 'El rol es obligatorio.',
+            'rol.in' => 'El rol seleccionado no es válido.',
         ]);
 
         $usuario = User::find($this->usuarioId);
@@ -148,6 +161,9 @@ class UserComponent extends Component
         }
 
         $usuario->save();
+
+        // Asignar el rol al usuario
+        $usuario->syncRoles([$this->rol]); // Cambiar el rol del usuario
 
         session()->flash('message', 'Usuario actualizado con éxito.');
         $this->cerrarModalEditar();
