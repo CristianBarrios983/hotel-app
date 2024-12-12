@@ -9,7 +9,7 @@
               </div>
               <div class="card-body">
                 <p class="card-text">Habitaciones ocupadas: <strong>{{ $habitacionesOcupadas }}</strong> / Total: <strong>{{ $totalHabitaciones }}</strong></p>
-                <p class="card-text">Ocupación: <strong>{{ $porcentajeOcupacion }}%</strong></p>
+                <p class="card-text">Ocupación: <strong>{{ round($porcentajeOcupacion) }}%</strong></p>
               </div>
             </div>
           </div>

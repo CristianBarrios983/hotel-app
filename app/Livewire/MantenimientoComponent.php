@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Models\Mantenimiento;
 use App\Models\Habitacion;
+use App\Models\User;
 
 class MantenimientoComponent extends Component
 {
@@ -13,7 +14,8 @@ class MantenimientoComponent extends Component
     public $habitaciones = [];
     public $mantenimientos;
     public $mantenimientoId;
-    public $habitacion_id, $descripcion, $personal, $prioridad, $estado;
+    public $habitacion_id, $descripcion, $personal_id, $prioridad, $estado;
+    public $personalUsuarios = [];
 
     public $isCreateModalOpen = 0;
     public $isEditModalOpen = 0;
@@ -21,11 +23,12 @@ class MantenimientoComponent extends Component
     public function mount()
     {
         $this->habitaciones = Habitacion::all();
+        $this->personalUsuarios = User::role('mantenimiento')->get();
     }
 
     public function render()
     {
-        $this->mantenimientos = Mantenimiento::with('habitacion')->get();
+        $this->mantenimientos = Mantenimiento::with(['habitacion', 'personal'])->get();
         return view('livewire.mantenimiento-component', [
             'habitaciones' => Habitacion::all()
         ])->layout('layouts.app');
@@ -47,7 +50,7 @@ class MantenimientoComponent extends Component
     {
         $this->habitacion_id = null;
         $this->descripcion = '';
-        $this->personal = '';
+        $this->personal_id = null;
         $this->prioridad = '';
         $this->estado = 'pendiente';
     }
@@ -57,15 +60,15 @@ class MantenimientoComponent extends Component
         $this->validate([
             'habitacion_id' => 'required|exists:habitaciones,id',
             'descripcion' => 'required|string',
-            'personal' => 'required|string',
+            'personal_id' => 'required|exists:users,id',
             'prioridad' => 'required|in:alta,media,baja',
         ], [
             'habitacion_id.required' => 'Debe seleccionar una habitación.',
             'habitacion_id.exists' => 'La habitación seleccionada no es válida.',
             'descripcion.required' => 'La descripción es obligatoria.',
             'descripcion.string' => 'La descripción debe ser texto.',
-            'personal.required' => 'El personal es obligatorio.',
-            'personal.string' => 'El personal debe ser texto.',
+            'personal_id.required' => 'El personal es obligatorio.',
+            'personal_id.exists' => 'El personal seleccionado no es válido.',
             'prioridad.required' => 'La prioridad es obligatoria.',
             'prioridad.in' => 'La prioridad debe ser alta, media o baja.'
         ]);
@@ -74,7 +77,7 @@ class MantenimientoComponent extends Component
         Mantenimiento::create([
             'habitacion_id' => $this->habitacion_id,
             'descripcion' => $this->descripcion,
-            'personal' => $this->personal,
+            'personal_id' => $this->personal_id,
             'prioridad' => $this->prioridad,
             'estado' => 'pendiente',  // Estado por defecto en minúsculas
         ]);
@@ -149,7 +152,7 @@ class MantenimientoComponent extends Component
         $this->mantenimientoId = $mantenimiento->id;
         $this->habitacion_id = $mantenimiento->habitacion_id;
         $this->descripcion = $mantenimiento->descripcion;
-        $this->personal = $mantenimiento->personal;
+        $this->personal_id = $mantenimiento->personal_id;
         $this->prioridad = $mantenimiento->prioridad;
     }
 
@@ -158,15 +161,15 @@ class MantenimientoComponent extends Component
         $this->validate([
             'habitacion_id' => 'required|exists:habitaciones,id',
             'descripcion' => 'required|string',
-            'personal' => 'required|string',
+            'personal_id' => 'required|exists:users,id',
             'prioridad' => 'required|in:alta,media,baja',
         ], [
             'habitacion_id.required' => 'Debe seleccionar una habitación.',
             'habitacion_id.exists' => 'La habitación seleccionada no es válida.',
             'descripcion.required' => 'La descripción es obligatoria.',
             'descripcion.string' => 'La descripción debe ser texto.',
-            'personal.required' => 'El personal es obligatorio.',
-            'personal.string' => 'El personal debe ser texto.',
+            'personal_id.required' => 'El personal es obligatorio.',
+            'personal_id.exists' => 'El personal seleccionado no es válido.',
             'prioridad.required' => 'La prioridad es obligatoria.',
             'prioridad.in' => 'La prioridad debe ser alta, media o baja.'
         ]);
@@ -176,7 +179,7 @@ class MantenimientoComponent extends Component
         $mantenimiento->update([
             'habitacion_id' => $this->habitacion_id,
             'descripcion' => $this->descripcion,
-            'personal' => $this->personal,
+            'personal_id' => $this->personal_id,
             'prioridad' => $this->prioridad,
         ]);
 
