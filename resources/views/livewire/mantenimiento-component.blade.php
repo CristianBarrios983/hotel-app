@@ -30,7 +30,7 @@
                     <tr>
                         <td>Habitación {{ $mantenimiento->habitacion->numero_habitacion }}</td>
                         <td>{{ $mantenimiento->descripcion }}</td>
-                        <td>{{ $mantenimiento->personal }}</td>
+                        <td>{{ $mantenimiento->personal->name ?? 'Sin Asignar' }}</td>
                         <td>{{ $mantenimiento->created_at->format('d/m/Y') }}</td>
                         <td>
                             <span class="badge {{ $mantenimiento->prioridad === 'alta' ? 'bg-danger' : 
@@ -110,14 +110,13 @@
 
                                 <div class="mb-3">
                                     <label for="personal" class="form-label">Personal Asignado</label>
-                                    <select class="form-select" wire:model="personal">
+                                    <select class="form-select" wire:model="personal_id">
                                         <option value="">Seleccione personal</option>
-                                        <option value="Personal 1">Personal 1</option>
-                                        <option value="Personal 2">Personal 2</option>
-                                        <option value="Personal 3">Personal 3</option>
-                                        <option value="Personal 4">Personal 4</option>
+                                        @foreach($personalUsuarios as $usuario)
+                                            <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                                        @endforeach
                                     </select>
-                                    @error('personal') <span class="text-danger">{{ $message }}</span> @enderror
+                                    @error('personal_id') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="mb-3">
@@ -173,14 +172,13 @@
 
                                 <div class="mb-3">
                                     <label for="personal" class="form-label">Personal Asignado</label>
-                                    <select class="form-select" wire:model="personal">
+                                    <select class="form-select" wire:model="personal_id">
                                         <option value="">Seleccione personal</option>
-                                        <option value="Personal 1">Personal 1</option>
-                                        <option value="Personal 2">Personal 2</option>
-                                        <option value="Personal 3">Personal 3</option>
-                                        <option value="Personal 4">Personal 4</option>
+                                        @foreach($personalUsuarios as $usuario)
+                                            <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                                        @endforeach
                                     </select>
-                                    @error('personal') <span class="text-danger">{{ $message }}</span> @enderror
+                                    @error('personal_id') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="mb-3">

@@ -60,6 +60,10 @@ Route::get('/pedidos', function () {
     return view('pedidos'); 
 })->name('pedidos')->middleware(['auth']);
 
+Route::get('/crear-pedido', function () {
+    return view('crear-pedido'); 
+})->name('crear-pedido')->middleware(['auth']);
+
 Route::get('/recepcion', function () {
     return view('recepcion'); 
 })->name('recepcion')->middleware(['auth']);
@@ -96,5 +100,13 @@ Route::get('/facturacion/{reserva}', function($reserva) {
 })
 ->name('facturacion')
 ->middleware(['auth']);
+
+Route::get('/reportes', function () {
+    return view('reportes'); 
+})->name('reportes')->middleware(['auth']);
+
+Route::get('/perfil', function () {
+    return view('perfil'); 
+})->name('perfil')->middleware(['auth']);
 
 require __DIR__.'/auth.php';

@@ -7,51 +7,32 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/dashboard">Panel</a>
+          <a class="nav-link active" aria-current="page" href="{{ route('dashboard') }}">Panel</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/usuarios">Usuarios</a>
+          <a class="nav-link" href="{{ route('usuarios') }}">Usuarios</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Gestión Hotelera
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/habitaciones">Listado de Habitaciones</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/pisos">Distribución de Pisos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/tipo_habitaciones">Categorías de Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{{ route('habitaciones') }}">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{{ route('pisos') }}">Pisos</a></li>
+            <li><a class="dropdown-item" href="{{ route('tipo_habitaciones') }}">Categorías</a></li>
+            <li><a class="dropdown-item" href="{{ route('huespedes') }}">Huespedes</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/huespedes">Huespedes</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Inventario
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/productos">Listado de Productos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/categorias">Categorías</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/proveedores">Proveedores</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/servicios">Servicios</a></li>
-          </ul>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/pedidos">Pedidos</a>
-        </li> -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Gestión de Pedidos
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/pedidos">Listado de Pedidos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/crear-pedido">Nuevo Pedido</a></li>
+            <li><a class="dropdown-item" href="{{ route('productos') }}">Productos</a></li>
+            <li><a class="dropdown-item" href="{{ route('categorias') }}">Categorías</a></li>
+            <li><a class="dropdown-item" href="{{ route('proveedores') }}">Proveedores</a></li>
+            <li><a class="dropdown-item" href="{{ route('servicios') }}">Servicios</a></li>
+            <li><a class="dropdown-item" href="{{ route('pedidos') }}">Pedidos</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -59,24 +40,20 @@
             Gestión de Reservas
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/recepcion">Recepción</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/reservas">Listado de Reservas</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/check-in">Check In</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/check-out">Check Out</a></li>
+            <li><a class="dropdown-item" href="{{ route('recepcion') }}">Recepción</a></li>
+            <li><a class="dropdown-item" href="{{ route('reservas') }}">Reservas</a></li>
+            <li><a class="dropdown-item" href="{{ route('check-in') }}">Check In</a></li>
+            <li><a class="dropdown-item" href="{{ route('check-out') }}">Check Out</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/mantenimiento">Mantenimiento</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="#">Reportes</a>
+          <a class="nav-link" href="{{ route('mantenimiento') }}">Mantenimiento</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/configuracion">Configuracion</a>
+          <a class="nav-link" href="{{ route('reportes') }}">Reportes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('configuracion') }}">Configuración</a>
         </li>
 
         <!-- Settings Dropdown -->
@@ -91,7 +68,7 @@
                   </div>
               </li>
                 <li>
-                    <a class="dropdown-item" href="{{ route('profile') }}" wire:navigate>
+                    <a class="dropdown-item" href="{{ route('perfil') }}" wire:navigate>
                         {{ __('Perfil') }}
                     </a>
                 </li>
@@ -104,7 +81,6 @@
             </ul>
         </li>
       </ul>
-      <!-- aqui va otra cosa -->
     </div>
   </div>
 </nav>

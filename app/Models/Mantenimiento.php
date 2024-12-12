@@ -16,12 +16,18 @@ class Mantenimiento extends Model
         'descripcion',
         'estado',
         'prioridad',
-        'personal'
+        'personal_id'
     ];
 
     // Relación con Habitación
     public function habitacion()
     {
         return $this->belongsTo(Habitacion::class);
+    }
+
+    // Relación con Habitación
+    public function personal()
+    {
+        return $this->belongsTo(User::class);
     }
 }
