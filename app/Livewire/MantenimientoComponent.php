@@ -26,13 +26,28 @@ class MantenimientoComponent extends Component
         $this->personalUsuarios = User::role('mantenimiento')->get();
     }
 
+    
     public function render()
-    {
+{
+    $user = auth()->user();
+
+    // Filtrar los mantenimientos según el rol del usuario
+    if ($user->hasRole('mantenimiento')) {
+        // Solo mostrar mantenimientos asignados al usuario actual
+        $this->mantenimientos = Mantenimiento::with(['habitacion', 'personal'])
+            ->where('personal_id', $user->id)
+            ->get();
+    } else {
+        // Mostrar todos los mantenimientos para otros roles (por ejemplo, admin)
         $this->mantenimientos = Mantenimiento::with(['habitacion', 'personal'])->get();
-        return view('livewire.mantenimiento-component', [
-            'habitaciones' => Habitacion::all()
-        ])->layout('layouts.app');
     }
+
+    // Retornar la vista con los mantenimientos filtrados
+    return view('livewire.mantenimiento-component', [
+        'habitaciones' => Habitacion::all(),
+    ])->layout('layouts.app');
+}
+
 
     public function abrirModalCrear()
     {
