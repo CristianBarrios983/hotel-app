@@ -7,6 +7,9 @@ use App\Models\Reservas;
 use App\Models\Productos;
 use App\Models\Servicios;
 use App\Models\Factura;
+use App\Models\User;
+use App\Models\Mantenimiento;
+use App\Models\Habitacion;
 use Illuminate\Support\Facades\DB;
 
 class FacturacionComponent extends Component
@@ -147,14 +150,25 @@ class FacturacionComponent extends Component
                 ]);
             }
 
-            // Actualizar el estado de la reserva
+            // 3. Crear un mantenimiento
+            $personal = User::role('mantenimiento')->inRandomOrder()->first(); // Selecciona un usuario al azar con rol de mantenimiento
+            $mantenimiento = Mantenimiento::create([
+                'habitacion_id' => $this->reserva->habitacion_id,
+                'descripcion' => 'Limpieza después de la facturación', // Descripción por defecto
+                'personal_id' => $personal ? $personal->id : null, // Asigna el ID del usuario o null si no hay
+                'prioridad' => 'media',
+                'estado' => 'pendiente', // Estado inicial del mantenimiento
+            ]);
+
+            // 4. Actualizar el estado de la reserva
             $this->reserva->update(['estado' => 'check_out']);
 
-            // Actualizar el estado de la habitación a disponible
-            $this->reserva->habitacion->update(['estado' => 'disponible']);
+            // 5. Actualizar el estado de la habitación a "En Mantenimiento"
+            $habitacion = Habitacion::find($this->reserva->habitacion_id);
+            $habitacion->update(['disponibilidad' => 'mantenimiento']);
 
             DB::commit();
-            session()->flash('message', 'Factura generada correctamente');
+            session()->flash('message', 'Factura generada correctamente y mantenimiento creado');
             return redirect()->route('check-out');
 
         } catch (\Exception $e) {
