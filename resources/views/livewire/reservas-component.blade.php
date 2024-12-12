@@ -1,7 +1,7 @@
 <div class="content p-4">
     <h1 class="mb-4">Reservas</h1>
     <div class="d-flex justify-content-between align-items-center my-2">
-        <a href="/crear-reserva" class="btn btn-primary">
+        <a href="/crear-reserva" class="btn btn-success">
             <i class="bi bi-plus-circle"></i> Nueva Reserva
         </a>
     </div>
@@ -19,7 +19,7 @@
     @endif
 
     <div class="table-responsive">
-        <table class="table table-hover" id="myTable">
+        <table class="table table-striped table-bordered table-hover" id="myTable">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Habitación</th>
@@ -55,7 +55,6 @@
                         <td>{{ $reserva->created_at->format('d/m/Y') }}</td>
                         <td class="text-center">
                             @if($reserva->estado === 'pendiente' || $reserva->estado === 'confirmada')
-                                <!-- Si está pendiente, mostrar botón de confirmar -->
                                 @if($reserva->estado === 'pendiente')
                                     <a href="#" 
                                        class="btn btn-success btn-sm" 
@@ -64,16 +63,12 @@
                                         <i class="bi bi-check-circle-fill"></i>
                                     </a>
                                 @endif
-                                
-                                <!-- Botón de No Show disponible en ambos estados -->
                                 <a href="#" 
                                    class="btn btn-info btn-sm" 
                                    title="Marcar No Show"
                                    wire:click.prevent="marcarNoShow({{ $reserva->id }})">
                                     <i class="bi bi-person-x-fill"></i>
                                 </a>
-                                
-                                <!-- Resto de botones solo si está pendiente -->
                                 @if($reserva->estado === 'pendiente')
                                     <a href="#" 
                                        class="btn btn-warning btn-sm" 
