@@ -18,7 +18,7 @@
             @endif
 
             <div class="table-responsive">
-                <table class="table table-hover" id="myTable">
+                <table class="table table-striped table-bordered table-hover" id="myTable">
                     <thead>
                         <tr>
                             <th>Hora Salida</th>

@@ -9,12 +9,14 @@
     @endif
 
     <!-- Botón para crear un nuevo pedido -->
-    <div class="mb-3">
-        <a href="{{ route('crear-pedido') }}" class="btn btn-primary">Crear Pedido</a>
+    <div class="d-flex justify-content-between align-items-center my-2">
+        <a href="{{ route('crear-pedido') }}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Crear Pedido
+        </a>
     </div>
 
     <div class="table-responsive">
-        <table class="table table-hover" id="myTable">
+        <table class="table table-striped table-bordered table-hover" id="myTable">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Pedido</th>

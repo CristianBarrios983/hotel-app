@@ -2,7 +2,9 @@
     <h1 class="mb-4">Mantenimientos del Establecimiento</h1>
 
     <div class="d-flex justify-content-between align-items-center my-2">
-        <button class="btn btn-primary" wire:click="abrirModalCrear">Registrar Nuevo Mantenimiento</button>
+        <button class="btn btn-success" wire:click="abrirModalCrear">
+            <i class="bi bi-plus-circle"></i> Registrar Nuevo Mantenimiento
+        </button>
     </div>
 
     <!-- Mensajes -->
@@ -13,7 +15,7 @@
     @endif
 
     <div class="table-responsive">
-        <table class="table table-hover" id="myTable">
+        <table class="table table-striped table-bordered table-hover" id="myTable">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Habitación</th>

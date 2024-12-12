@@ -1,7 +1,9 @@
 <div class="content p-4">
     <h1 class="mb-4">Pisos del establecimiento</h1>
     <div class="d-flex justify-content-between align-items-center my-2">
-        <button class="btn btn-primary" wire:click="abrirModalCrear">Registrar</button>
+        <button class="btn btn-success" wire:click="abrirModalCrear">
+            <i class="bi bi-plus-circle"></i> Registrar
+        </button>
     </div>
 
     <!-- Mensajes -->
@@ -12,7 +14,7 @@
     @endif
 
     <div class="table-responsive">
-        <table class="table table-hover" id="myTable">
+        <table class="table table-striped table-bordered table-hover" id="myTable">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Numero de piso</th>

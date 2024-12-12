@@ -71,7 +71,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6>Tasa de Ocupación</h6>
-                            <h2>{{ $porcentajeOcupacion }}%</h2>
+                            <h2>{{ round($porcentajeOcupacion) }}%</h2>
                         </div>
                     </div>
                 </div>
